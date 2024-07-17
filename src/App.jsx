@@ -1,6 +1,9 @@
 import "./App.css";
-
+import emoji from "../public/Emoji-text.png";
+import ActivityInfo from "./components/ActivityInfo";
+import { useState } from "react";
 function App() {
+  const [isShowActivityInfo, setISShowActivityInfo] = useState(false);
   return (
     <div className="app-container">
       <div className="background_speheres">
@@ -129,6 +132,22 @@ function App() {
             fill="white"
           />
         </svg>
+      </div>
+      <div className="Emoji_above_text">
+        <p>You found</p>
+      </div>
+      <div className="Emoji_text">
+        <img src={emoji}/>
+      </div>
+      <div className="Our_activity_info">
+      {isShowActivityInfo && <ActivityInfo onClose={() => { setISShowActivityInfo(false);}}/>}
+      {!isShowActivityInfo && <div className="activity_info">
+        <p className='Landing_activity_info' onClick={() => { setISShowActivityInfo(true); }}>Activity info</p>
+      </div>}
+      </div>
+      <div className={`Landing_buttons ${isShowActivityInfo?'lbmargintop':''}`}>
+        <button className='Landing_start' >Start</button>
+        <button className='Landing_activity'>choose another activity</button>
       </div>
     </div>
   );
