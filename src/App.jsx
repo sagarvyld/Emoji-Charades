@@ -2,18 +2,17 @@ import "./App.css";
 
 function App() {
   return (
-    <>
-    <div className="background_speheres">
-    <svg width="360" height="628" viewBox="0 0 360 628" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="180" cy="314" r="32.5" stroke="white" stroke-opacity="0.1"/>
-<circle cx="180" cy="314" r="64.5" stroke="white" stroke-opacity="0.1"/>
-<circle cx="180" cy="314" r="100.5" stroke="white" stroke-opacity="0.1"/>
-<circle cx="180" cy="314" r="147.5" stroke="white" stroke-opacity="0.1"/>
-<circle cx="180" cy="314" r="215.5" stroke="white" stroke-opacity="0.1"/>
-<circle cx="180" cy="314" r="313.5" stroke="white" stroke-opacity="0.1"/>
-</svg>
-
-    </div>
+    <div className="app-container">
+      <div className="background_speheres">
+        <svg width="360" height="628" viewBox="0 0 360 628" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="180" cy="314" r="32.5" stroke="white" strokeOpacity="0.1"/>
+          <circle cx="180" cy="314" r="64.5" stroke="white" strokeOpacity="0.1"/>
+          <circle cx="180" cy="314" r="100.5" stroke="white" strokeOpacity="0.1"/>
+          <circle cx="180" cy="314" r="147.5" stroke="white" strokeOpacity="0.1"/>
+          <circle cx="180" cy="314" r="215.5" stroke="white" strokeOpacity="0.1"/>
+          <circle cx="180" cy="314" r="313.5" stroke="white" strokeOpacity="0.1"/>
+        </svg>
+      </div>
       <div className="background_moons">
         <svg
           width="360"
@@ -29,7 +28,7 @@ function App() {
             ry="2.66344"
             transform="rotate(48.2745 158.417 184.358)"
             fill="white"
-            fill-opacity="0.5"
+            fillOpacity="0.5"
           />
           <ellipse
             cx="291.643"
@@ -86,7 +85,7 @@ function App() {
             ry="0.887814"
             transform="rotate(48.2745 342.002 534.289)"
             fill="white"
-            fill-opacity="0.5"
+            fillOpacity="0.5"
           />
           <ellipse
             cx="271.354"
@@ -95,7 +94,7 @@ function App() {
             ry="0.887814"
             transform="rotate(48.2745 271.354 705.845)"
             fill="white"
-            fill-opacity="0.5"
+            fillOpacity="0.5"
           />
           <ellipse
             cx="17.6632"
@@ -131,7 +130,7 @@ function App() {
           />
         </svg>
       </div>
-    </>
+    </div>
   );
 }
 
