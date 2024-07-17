@@ -8,8 +8,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: -40px;
 }
 body, html {
+  overflow: hidden;
   height: 100%;
   margin: 0;
   display: flex;
