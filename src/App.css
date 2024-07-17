@@ -21,17 +21,12 @@ body, html {
 body{
   background: var(--Dark-Dark--100, #0E1928);
 }
-.background_moons{
 
-  display: flex;
-  justify-content: center; 
-  align-items: center;  
-}
 .background_speheres{
-  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 75px;
 }
 .Emoji_text{
   position: absolute;
@@ -48,7 +43,7 @@ body{
   font-weight: 500;
   line-height: 100%; /* 12px */
   text-decoration-line: underline;
-  margin-top: 21rem;
+  margin-top:33rem;
 }
 .Emoji_above_text{
   color: var(--Neutral-Light, #FFF);
@@ -94,8 +89,7 @@ font-style: normal;
 }
 .smile_emoji_1{
   position: absolute;
-  margin-right: 154px;
-  margin-top: -150px;
+  margin-top: 93px;
 }
 .Landing_activity {
   color: var(--Light-Light--100, #FFF);
