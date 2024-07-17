@@ -1,6 +1,30 @@
 #root {
-
+  width: 100vw;
+  height: 100vh;
   margin: 0px;
   padding: 0px;
-
+}
+body, html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body{
+  background: var(--Dark-Dark--100, #0E1928);
+}
+.background_moons{
+position: absolute;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  height: 100vh; 
+}
+.background_speheres{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
