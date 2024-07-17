@@ -87,10 +87,18 @@ body{
   border-radius: 0.75rem;
   background: var(--Primary-Primary-100, #c6ff00);
   border: none;
+  color: var(--Neutral-Rich-Dark, #090909);
+font-family: Gilroy;
+font-size: 14px;
+font-style: normal;
 }
 .Landing_activity {
-  
-  color: white;
+  color: var(--Light-Light--100, #FFF);
+font-family: Gilroy;
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: 100%;
   background: var(--Dark-Dark--100, #0e1928);
   display: inline-flex;
   padding: 0.9375rem 2rem;
