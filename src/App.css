@@ -92,6 +92,11 @@ font-family: Gilroy;
 font-size: 14px;
 font-style: normal;
 }
+.smile_emoji_1{
+  position: absolute;
+  margin-right: 154px;
+  margin-top: -150px;
+}
 .Landing_activity {
   color: var(--Light-Light--100, #FFF);
 font-family: Gilroy;
