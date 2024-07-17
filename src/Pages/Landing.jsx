@@ -20,7 +20,7 @@ const Landing = () => {
         <svg
           width="360"
           height="781"
-          viewBox="0 0 360 781"
+          viewBox="0 0 360 725"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
