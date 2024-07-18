@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './dumbcharades.css';
 import EmojiKeyboard from '../components/EmojiKeyboard';
 
 const Dumbcharades = () => {
+
+    const [textAreaValue, setTextAreaValue] = useState('');
+
+    const handleEmojiClick = (emoji) => {
+        setTextAreaValue(prevValue => prevValue + emoji);
+    };
+    const removeLast = () => {
+        setTextAreaValue(prevValue => {
+            if (prevValue.length === 0) return '';
+            const codePoint = prevValue.codePointAt(prevValue.length - 1);
+            // console.log("cp", codePoint);
+            return codePoint !== 32
+                ? prevValue.slice(0, -2) 
+                : prevValue.slice(0, -1); 
+        });
+    };
+
     return (
         <div className='dcPage'>
             <div className='bkbtn_ec'>
@@ -28,7 +45,8 @@ const Dumbcharades = () => {
             </div>
             <div className='emojiArea'>
                 <textarea className='emojiTextArea' placeholder='Enter emojis'
-                    style={{ resize: "none", whiteSpace: 'pre-wrap' }}>
+                    style={{ resize: "none", whiteSpace: 'pre-wrap' }} value={textAreaValue}
+                    onChange={(e) => setTextAreaValue(e.target.value)}>
                 </textarea>
                 <div className='emojiAi'>
                     <svg className="emojiAiIcon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -41,7 +59,7 @@ const Dumbcharades = () => {
                     <span className='emojiAiText'>Ask AI</span>
                 </div>
             </div>
-            <EmojiKeyboard/>
+            <EmojiKeyboard onEmojiClick={handleEmojiClick} removeLast={removeLast}/>
             <button className='nextForEmoji'>Next</button>
         </div>
     )
