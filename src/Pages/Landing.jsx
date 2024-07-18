@@ -1,6 +1,7 @@
 import React from "react";
 import emoji from "../../public/Emoji-text.png";
 import ActivityInfo from "../components/ActivityInfo";
+import "./Landing.css";
 import { useState } from "react";
 const Landing = () => {
   const [isShowActivityInfo, setISShowActivityInfo] = useState(false);
