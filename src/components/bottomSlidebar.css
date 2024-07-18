@@ -67,6 +67,7 @@
   
   .topicItem.selected {
     color: #C6FF00;
+    justify-content: space-between;
   }
   
   .topicItemtxt {

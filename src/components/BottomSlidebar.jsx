@@ -20,7 +20,7 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic }) => {
                         <span className='topicItemtxt' style={{ color: selectedTopic === topic ? '#C6FF00' : '' }}
                         >{topic}</span>
                         {selectedTopic === topic && (
-                            <svg style={{ position:"absolute", right:"1.5rem"}}xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                                 <circle cx="9" cy="9" r="8.5" fill="#C6FF00" stroke="#161716" />
                                 <path d="M5.14282 9.00002L7.71425 11.5714L12.8571 6.42859" stroke="#161716" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
