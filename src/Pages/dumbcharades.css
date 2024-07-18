@@ -181,6 +181,8 @@
 }
 @media (max-height:740px) {
   .nextForEmoji {
+    height: 6vh;
+    width: 55vw;
     bottom: 3.5vh;
   }
 }
