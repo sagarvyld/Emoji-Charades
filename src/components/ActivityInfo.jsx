@@ -11,9 +11,9 @@ const ActivityInfo = (props) => {
             </svg>
             </div>
             <div className='acib-topo'>
-                <p style={{ textAlign: "left", margin: "0" }}> <b style={{ color: "#FFF", fontWeight: "600" }}>Snap:</b> Get a cool prompt and take a photo that matches the theme.</p>
-                <p style={{ textAlign: "left", margin: "0" }}><b style={{ color: "#FFF", fontWeight: "600" }}>Match:</b> They See your photo only after they take theirs. </p>
-                <p style={{ textAlign: "left", margin: "0" }}> <b style={{ color: "#FFF", fontWeight: "600" }}>Connect:</b> Reveal, react, and start chatting!</p>
+                <p style={{ textAlign: "left", margin: "0" }}> <b style={{ color: "#FFF", fontWeight: "600" }}>Challenge:</b> Send a string of emojis to represent a movie.</p>
+                <p style={{ textAlign: "left", margin: "0" }}><b style={{ color: "#FFF", fontWeight: "600" }}>Guess:</b> The other person guesses the movie name based on your emojis. </p>
+                <p style={{ textAlign: "left", margin: "0" }}> <b style={{ color: "#FFF", fontWeight: "600" }}>Connect:</b> Once guessed, chat, add friends, and share your game results!</p>
             </div>
         </div>
     )

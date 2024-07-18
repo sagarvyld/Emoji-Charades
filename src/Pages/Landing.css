@@ -1,33 +1,38 @@
-.app-container{
+.app-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: -57px;
 }
-  .background_speheres{
+
+.background_speheres {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 75px;
-  }
-  .Emoji_text{
+}
+
+.Emoji_text {
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    
-  }
-  .Landing_activity_info {
+
+}
+
+.Landing_activity_info {
     color: var(--Light-Light--80, #E0E7F1);
     font-family: Gilroy;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
-    line-height: 100%; /* 12px */
+    line-height: 100%;
+    /* 12px */
     text-decoration-line: underline;
-    margin-top:33rem;
-  }
-  .Emoji_above_text{
+    margin-top: 33rem;
+}
+
+.Emoji_above_text {
     color: var(--Neutral-Light, #FFF);
     text-align: center;
     font-feature-settings: 'clig' off, 'liga' off;
@@ -41,17 +46,19 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 63px;
-  }
-  .Landing_buttons {
+}
+
+.Landing_buttons {
     position: fixed;
-    bottom:1rem;
+    bottom: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 12px;
-  }
-  .Landing_start {
+}
+
+.Landing_start {
     font-weight: 700;
     display: flex;
     width: 13.625rem;
@@ -65,21 +72,23 @@
     background: var(--Primary-Primary-100, #c6ff00);
     border: none;
     color: var(--Neutral-Rich-Dark, #090909);
-  font-family: Gilroy;
-  font-size: 14px;
-  font-style: normal;
-  }
-  .smile_emoji_1{
+    font-family: Gilroy;
+    font-size: 14px;
+    font-style: normal;
+}
+
+.smile_emoji_1 {
     position: absolute;
     margin-top: 93px;
-  }
-  .Landing_activity {
+}
+
+.Landing_activity {
     color: var(--Light-Light--100, #FFF);
-  font-family: Gilroy;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 100%;
+    font-family: Gilroy;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%;
     background: var(--Dark-Dark--100, #0e1928);
     display: inline-flex;
     padding: 0.9375rem 2rem;
@@ -89,15 +98,16 @@
     border-radius: 0.75rem;
     font-weight: 700;
     border: 1.8px solid var(--Light-Light--100, #fff);
-  }
-  .Emoji_text img{
+}
+
+.Emoji_text img {
     margin-top: 50px;
-  }
-  .Our_activity_info{
+}
+
+.Our_activity_info {
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 50px;
-  }
-  
+}
