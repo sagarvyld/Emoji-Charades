@@ -8,13 +8,13 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic }) => {
     return (
         <div className={`bottomSlidebar ${isOpen ? 'open' : ''}`}>
             <div className='slidebarHeader'>
-                <span>Select a Topic</span>
+                <span className='slidebar_heading'>Movies</span>
                 <button className='closeBtn' onClick={onClose}>X</button>
             </div>
             <div className='slidebarContent'>
                 {topics.map((topic, index) => (
                     <div key={index} className='topicItem' onClick={() => onSelectTopic(topic)}>
-                        {topic}
+                        <span className='topicItemtxt'>{topic}</span>
                     </div>
                 ))}
             </div>
