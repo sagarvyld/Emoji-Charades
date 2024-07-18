@@ -15,7 +15,7 @@
   left: 1.25rem;
 }
 .movieHeading {
-  margin-top: 2.5rem;
+  margin-top: 6vh;
   color: var(--Neutral-Light, #fff);
   text-align: center;
   font-feature-settings: "clig" off, "liga" off;
@@ -57,7 +57,7 @@
   align-items: center;
   justify-content: center;
   gap: 3px;
-  margin-top: 0.5rem;
+  margin-top: 2vh;
 }
 .topicText {
   color: var(--Accent-Accent--03-Accent-03, #fbff08);
@@ -171,5 +171,5 @@
   background: var(--Accent-color-Acc-06, #bef229);
   box-shadow: 1px 1px 0px 0px #161716;
   position: fixed;
-  bottom: 5vh;
+  bottom: 6.2vh;
 }
