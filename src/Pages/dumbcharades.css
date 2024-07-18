@@ -173,3 +173,14 @@
   position: fixed;
   bottom: 6.2vh;
 }
+
+@media (max-height:740px) {
+  .nextForEmoji {
+    bottom: 4.5vh;
+  }
+}
+@media (max-height:740px) {
+  .nextForEmoji {
+    bottom: 3.5vh;
+  }
+}
