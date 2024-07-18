@@ -2,7 +2,8 @@ import React from 'react';
 import './bottomSlidebar.css';
 
 const BottomSlidebar = ({ isOpen, onClose, onSelectTopic }) => {
-    const topics = ['Reservoir Dogs', 'Inception', 'The Dark Knight', 'Interstellar', 'Pulp Fiction'];
+    const topics = ['I don’t want any prompt', 'Inception', 'Can we talk about', 'Rate my fit', 'Reservoir Dogs', 'The Dark Knight', 'A daily essential', 'Interstellar', 'Pulp Fiction', 'Cook with me',];
+
 
     return (
         <div className={`bottomSlidebar ${isOpen ? 'open' : ''}`}>
