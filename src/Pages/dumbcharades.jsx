@@ -13,7 +13,6 @@ const Dumbcharades = (props) => {
         setTextAreaValue(prevValue => {
             if (prevValue.length === 0) return '';
             const codePoint = prevValue.codePointAt(prevValue.length - 1);
-            // console.log("cp", codePoint);
             return codePoint !== 32
                 ? prevValue.slice(0, -2) 
                 : prevValue.slice(0, -1); 
