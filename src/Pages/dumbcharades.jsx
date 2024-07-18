@@ -79,6 +79,7 @@ const Dumbcharades = (props) => {
                 isOpen={isSlidebarOpen} 
                 onClose={handleCloseSlidebar} 
                 onSelectTopic={handleSelectTopic} 
+                selectedTopic={selectedTopic}
             /> }
         </div>
     )
