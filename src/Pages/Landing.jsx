@@ -3,7 +3,7 @@ import emoji from "../../public/Emoji-text.png";
 import ActivityInfo from "../components/ActivityInfo";
 import "./Landing.css";
 import { useState } from "react";
-const Landing = () => {
+const Landing = (props) => {
   const [isShowActivityInfo, setISShowActivityInfo] = useState(false);
   const [margintop, setMargintop] = useState({});
   const [margintop1, setMargintop1] = useState({});
@@ -2688,7 +2688,7 @@ const Landing = () => {
       <div
         className={`Landing_buttons ${isShowActivityInfo ? "lbmargintop" : ""}`}
       >
-        <button className="Landing_start">Start</button>
+        <button className="Landing_start" onClick={props.onNext}>Start</button>
         <button className="Landing_activity">choose another activity</button>
       </div>
     </div>
