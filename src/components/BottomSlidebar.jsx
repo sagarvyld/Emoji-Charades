@@ -13,18 +13,51 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic }) => {
         topic.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+    // const handleDragStart = (event) => {
+    //     console.log("hey hi");
+    //     const slidebar = document.querySelector('.bottomSlidebar');
+    //     const startY = event.clientY || event.touches[0].clientY;
+    //     const startHeight = slidebar.getBoundingClientRect().height;
+
+    //     const onDragMove = (moveEvent) => {
+    //         const currentY = moveEvent.clientY || moveEvent.touches[0].clientY;
+    //         const newHeight = startHeight - (currentY - startY);
+    //         slidebar.style.height = `${newHeight}px`;
+    //         if (newHeight <= window.innerHeight * 0.1) {
+    //             onClose();
+    //         }
+    //     };
+
+    //     const onDragEnd = () => {
+    //         document.removeEventListener('mousemove', onDragMove);
+    //         document.removeEventListener('mouseup', onDragEnd);
+    //         document.removeEventListener('touchmove', onDragMove);
+    //         document.removeEventListener('touchend', onDragEnd);
+    //     };
+
+    //     document.addEventListener('mousemove', onDragMove);
+    //     document.addEventListener('mouseup', onDragEnd);
+    //     document.addEventListener('touchmove', onDragMove);
+    //     document.addEventListener('touchend', onDragEnd);
+    // };
+
     const handleDragStart = (event) => {
-        console.log("hey hi");
         const slidebar = document.querySelector('.bottomSlidebar');
         const startY = event.clientY || event.touches[0].clientY;
         const startHeight = slidebar.getBoundingClientRect().height;
+        const upperLimit = window.innerHeight * 0.9; // 80vh
+        const lowerLimit = window.innerHeight * 0.5; // 50vh
 
         const onDragMove = (moveEvent) => {
             const currentY = moveEvent.clientY || moveEvent.touches[0].clientY;
             const newHeight = startHeight - (currentY - startY);
-            slidebar.style.height = `${newHeight}px`;
-            if (newHeight <= window.innerHeight * 0.1) {
+
+            if (newHeight >= upperLimit) {
+                slidebar.style.height = `${upperLimit}px`;
+            } else if (newHeight <= lowerLimit) {
                 onClose();
+            } else {
+                slidebar.style.height = `${newHeight}px`;
             }
         };
 
