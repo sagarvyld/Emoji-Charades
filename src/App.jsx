@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import Landing from "./Pages/Landing";
 import Dumbcharades from "./Pages/dumbcharades";
+import SendPage from "./Pages/SendPage";
 function App() {
   const [gameIndex, setIndex] = useState(null);
   let content;
@@ -14,7 +15,8 @@ function App() {
   }
   return (
   <div>
-    {content}
+    {/* {content} */}
+    <SendPage/>
   </div>
   );
 }
