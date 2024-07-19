@@ -14,10 +14,7 @@ const Dumbcharades = (props) => {
     const removeLast = () => {
         props.setTextAreaValue(prevValue => {
             if (prevValue.length === 0) return '';
-            const codePoint = prevValue.codePointAt(prevValue.length - 1);
             return prevValue.slice(0, -2);
-            // codePoint !== 32
-            //     ? prevValue.slice(0, -2)
         });
     };
 
@@ -34,8 +31,6 @@ const Dumbcharades = (props) => {
         setIsSlidebarOpen(false);
     };
     const changeSelectTopicArea = () => {
-        // const randomIndex = Math.floor(Math.random() * TopicAreas.length);
-        // setSelectedTopicArea(TopicAreas[randomIndex]);
         let newTopicArea;
         do {
             const randomIndex = Math.floor(Math.random() * TopicAreas.length);
