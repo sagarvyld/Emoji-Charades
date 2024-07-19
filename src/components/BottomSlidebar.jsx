@@ -18,7 +18,7 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic }) => {
     );
 
     const handleMove = (e) => {
-        e.preventDefault(); // Prevent default behavior for smooth dragging
+        e.preventDefault(); 
         const clientY = e.clientY || e.touches[0].clientY;
         const height = window.innerHeight - clientY;
         if (height < 200) {
