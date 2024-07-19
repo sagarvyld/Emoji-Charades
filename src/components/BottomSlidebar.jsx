@@ -6,7 +6,8 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [slidebarHeight, setSlidebarHeight] = useState('50vh');
     const slidebarRef = useRef(null);
-    const isResizingRef = useRef(false);
+    const isDraggingRef = useRef(false);
+    const startYRef = useRef(0);
 
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);
@@ -16,44 +17,36 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic }) => {
         topic.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    useEffect(() => {
-        const handleMove = (e) => {
-            if (isResizingRef.current) {
-                const clientY = e.clientY || e.touches[0].clientY;
-                const newHeight = Math.min(Math.max(window.innerHeight - clientY, 200), window.innerHeight * 0.8);
-                setSlidebarHeight(`${newHeight}px`);
-            }
-        };
+    const handleMove = (e) => {
+        e.preventDefault(); // Prevent default behavior for smooth dragging
+        const clientY = e.clientY || e.touches[0].clientY;
+        const height = window.innerHeight - clientY;
+        if (height < 200) {
+            setSlidebarHeight('0px');
+            setIsDragging(false);
+            onClose();
+        } else {
+            setSlidebarHeight(`${Math.min(Math.max(height, 200), window.innerHeight * 0.8)}px`);
+        }
+    };
 
-        const handleUp = () => {
-            isResizingRef.current = false;
-            document.removeEventListener('mousemove', handleMove);
-            document.removeEventListener('mouseup', handleUp);
-            document.removeEventListener('touchmove', handleMove);
-            document.removeEventListener('touchend', handleUp);
+    const handleEnd = () => {
+        setIsDragging(false);
+        document.removeEventListener('mousemove', handleMove);
+        document.removeEventListener('mouseup', handleEnd);
+        document.removeEventListener('touchmove', handleMove);
+        document.removeEventListener('touchend', handleEnd);
+    };
 
-            if (slidebarRef.current.offsetHeight < window.innerHeight * 0.2) {
-                onClose();
-            }
-        };
-
-        const handleDown = (e) => {
-            isResizingRef.current = true;
-            document.addEventListener('mousemove', handleMove);
-            document.addEventListener('mouseup', handleUp);
-            document.addEventListener('touchmove', handleMove);
-            document.addEventListener('touchend', handleUp);
-        };
-
-        const dragHandle = slidebarRef.current.querySelector('.dragHandle');
-        dragHandle.addEventListener('mousedown', handleDown);
-        dragHandle.addEventListener('touchstart', handleDown);
-
-        return () => {
-            dragHandle.removeEventListener('mousedown', handleDown);
-            dragHandle.removeEventListener('touchstart', handleDown);
-        };
-    }, [onClose]);
+    const handleStart = (e) => {
+        e.preventDefault(); // Prevent default behavior for smooth dragging
+        isDraggingRef.current = true;
+        startYRef.current = e.clientY || e.touches[0].clientY;
+        document.addEventListener('mousemove', handleMove);
+        document.addEventListener('mouseup', handleEnd);
+        document.addEventListener('touchmove', handleMove);
+        document.addEventListener('touchend', handleEnd);
+    };
 
     useEffect(() => {
         if (!isOpen) {
@@ -63,7 +56,7 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic }) => {
 
     return (
         <div ref={slidebarRef} className={`bottomSlidebar ${isOpen ? 'open' : ''}`} style={{ height: slidebarHeight }}>
-            <div className='dragHandle'></div>
+            <div className='dragHandle' onMouseDown={handleStart} onTouchStart={handleStart}></div>
             <div className='slidebarHeader'>
                 <span className='slidebar_heading'>Movies</span>
             </div>
