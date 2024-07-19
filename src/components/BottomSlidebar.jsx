@@ -14,6 +14,7 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic }) => {
     );
 
     const handleDragStart = (event) => {
+        console.log("hey hi");
         const slidebar = document.querySelector('.bottomSlidebar');
         const startY = event.clientY || event.touches[0].clientY;
         const startHeight = slidebar.getBoundingClientRect().height;
@@ -42,10 +43,10 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic }) => {
 
     return (
         <div className={`bottomSlidebar ${isOpen ? 'open' : ''}`}>
-            <div className='slidebarHeader'>
+            <div className='slidebarHeader' onMouseDown={handleDragStart} onTouchStart={handleDragStart}>
                 <span className='slidebar_heading'>Movies</span>
                 <button className='closeBtn' onClick={onClose}>X</button>
-                <div className='dragHandle' onMouseDown={handleDragStart} onTouchStart={handleDragStart}></div>
+                <div className='dragHandle'></div>
             </div>
             <div className='searchBarContainer'>
                 <svg className='searchIcon' xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
