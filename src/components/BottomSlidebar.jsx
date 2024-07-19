@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './bottomSlidebar.css';
 
 const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic }) => {
     const topics = ['I don’t want any prompt', 'Inception', 'Can we talk about', 'Rate my fit', 'Reservoir Dogs', 'The Dark Knight', 'A daily essential', 'Interstellar', 'Pulp Fiction', 'Cook with me'];
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const filteredTopics = topics.filter(topic =>
+        topic.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <div className={`bottomSlidebar ${isOpen ? 'open' : ''}`}>
@@ -10,8 +19,20 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic }) => {
                 <span className='slidebar_heading'>Movies</span>
                 <button className='closeBtn' onClick={onClose}>X</button>
             </div>
+            <div className='searchBarContainer'>
+                <svg className='searchIcon' xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M10.6402 10.9125L12.6958 12.9628M12.2367 6.99333C12.2367 9.88913 9.88913 12.2367 6.99333 12.2367C4.09752 12.2367 1.75 9.88913 1.75 6.99333C1.75 4.09752 4.09752 1.75 6.99333 1.75C9.88913 1.75 12.2367 4.09752 12.2367 6.99333Z" stroke="white" stroke-opacity="0.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <input
+                    type='text'
+                    className='searchBar'
+                    placeholder='Search'
+                    value={searchTerm}
+                    onChange={handleSearch}
+                />
+            </div>
             <div className='slidebarContent'>
-                {topics.map((topic, index) => (
+                {filteredTopics.map((topic, index) => (
                     <div
                         key={index}
                         className={`topicItem ${selectedTopic === topic ? 'selected' : ''}`}

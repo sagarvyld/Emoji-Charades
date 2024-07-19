@@ -173,15 +173,17 @@
   bottom: 6.2vh;
 }
 
-@media (max-height:740px) {
+@media (max-height: 740px) {
   .nextForEmoji {
     bottom: 4.5vh;
   }
 }
-@media (max-height:740px) {
+@media (max-height: 740px) {
   .nextForEmoji {
     height: 6vh;
     width: 55vw;
     bottom: 3.5vh;
   }
 }
+
+
