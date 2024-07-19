@@ -15,7 +15,7 @@ const SendPage = (props) => {
             <div className='msgheading'><span>Add a special message</span></div>
             <div className='msgSubheading'><span>Add your personal touch to the activity
                 before you send..</span></div>
-            <div className="sendinfoDiv"><span>Guess the movie</span></div>
+            <div className="sendinfoDiv"><span>Guess the movie</span><span className='s2'>🤐😏😁😎</span></div>
             <AddNote textareaValue={textareaValue} setTextareaValue={setTextareaValue} />
             <button className={`nxtbtntp`} ><span className={`nxtbtntp-txt`}>Send</span></button>
         </div>
