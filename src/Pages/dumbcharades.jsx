@@ -73,6 +73,7 @@ const Dumbcharades = (props) => {
             <div className='emojiArea'>
                 <textarea className='emojiTextArea' placeholder='Enter emojis'
                     style={{ resize: "none", whiteSpace: 'pre-wrap' }} value={textAreaValue}
+                    readOnly={true}
                     onChange={(e) => setTextAreaValue(e.target.value)}>
                 </textarea>
                 <div className='emojiAi'>
