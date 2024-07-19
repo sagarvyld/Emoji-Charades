@@ -4,18 +4,15 @@ import EmojiKeyboard from '../components/EmojiKeyboard';
 import BottomSlidebar from '../components/BottomSlidebar';
 
 const Dumbcharades = (props) => {
-    const [textAreaValue, setTextAreaValue] = useState('');
     const [isSlidebarOpen, setIsSlidebarOpen] = useState(false);
-    const [selectedTopic, setSelectedTopic] = useState('Reservoir Dogs');
-    const [selectedTopicArea, setSelectedTopicArea] = useState('Movie');
 
     const TopicAreas = ['Movie','Music','Sports','Literature','Books','Drama', 'Story', 'Poetry']
 
     const handleEmojiClick = (emoji) => {
-        setTextAreaValue(prevValue => prevValue + emoji);
+        props.setTextAreaValue(prevValue => prevValue + emoji);
     };
     const removeLast = () => {
-        setTextAreaValue(prevValue => {
+        props.setTextAreaValue(prevValue => {
             if (prevValue.length === 0) return '';
             const codePoint = prevValue.codePointAt(prevValue.length - 1);
             return prevValue.slice(0, -2);
@@ -33,7 +30,7 @@ const Dumbcharades = (props) => {
     };
 
     const handleSelectTopic = (topic) => {
-        setSelectedTopic(topic);
+        props.setSelectedTopic(topic);
         setIsSlidebarOpen(false);
     };
     const changeSelectTopicArea = () => {
@@ -43,8 +40,8 @@ const Dumbcharades = (props) => {
         do {
             const randomIndex = Math.floor(Math.random() * TopicAreas.length);
             newTopicArea = TopicAreas[randomIndex];
-        } while (newTopicArea === selectedTopicArea);
-        setSelectedTopicArea(newTopicArea);
+        } while (newTopicArea === props.selectedTopicArea);
+        props.setSelectedTopicArea(newTopicArea);
     };
 
     return (
@@ -54,7 +51,7 @@ const Dumbcharades = (props) => {
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M13.165 11.9934L13.1634 11.6393C13.1513 10.2348 13.0666 8.98174 12.9206 8.18763C12.9206 8.17331 12.7613 7.38572 12.6599 7.12355C12.5006 6.74463 12.2126 6.42299 11.8515 6.2192C11.5624 6.0738 11.2592 6 10.9417 6C10.6922 6.01157 10.2806 6.13714 9.98692 6.24242L9.74283 6.33596C8.12612 6.97815 5.03561 9.07656 3.85199 10.3598L3.76473 10.4495L3.37527 10.8698C3.12982 11.1915 3 11.5847 3 12.0077C3 12.3866 3.11563 12.7656 3.3469 13.0718C3.41614 13.171 3.52766 13.2983 3.62693 13.4058L4.006 13.8026C5.31046 15.1243 8.13485 16.9782 9.59883 17.5924C9.59883 17.6057 10.5086 17.9857 10.9417 18H10.9995C11.6639 18 12.2846 17.6211 12.6021 17.0086C12.6888 16.8412 12.772 16.5132 12.8352 16.2252L12.949 15.6813C13.0788 14.8067 13.165 13.465 13.165 11.9934ZM19.4967 13.5183C20.3269 13.5183 21 12.8387 21 12.0004C21 11.1622 20.3269 10.4825 19.4967 10.4825L15.7975 10.8097C15.1463 10.8097 14.6183 11.3417 14.6183 12.0004C14.6183 12.6581 15.1463 13.1912 15.7975 13.1912L19.4967 13.5183Z" fill="white" />
                 </svg>
             </div>
-            <div className='movieHeading'>{selectedTopicArea}</div>
+            <div className='movieHeading'>{props.selectedTopicArea}</div>
             <div className='newSelectbtn' onClick={changeSelectTopicArea}>
                 <svg className='newSelectIcon' xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
                     <path d="M14.7926 10.9428C14.6684 10.8788 14.5256 10.8608 14.3893 10.8917C14.2531 10.9227 14.1321 11.0007 14.0477 11.1121C13.9633 11.2234 13.9209 11.361 13.9279 11.5005C13.9349 11.64 13.9909 11.7726 14.086 11.875L14.9529 12.5221H12.7798C12.1799 12.5163 11.5889 12.3768 11.0497 12.1139C10.5105 11.851 10.0366 11.4712 9.66259 11.0021C9.60918 10.9448 9.54501 10.8986 9.47373 10.8661C9.40245 10.8336 9.32547 10.8154 9.24718 10.8127C9.08906 10.8071 8.93521 10.8646 8.81947 10.9725C8.70373 11.0803 8.63558 11.2298 8.63001 11.3879C8.62444 11.546 8.68191 11.6998 8.78978 11.8156C9.27447 12.4187 9.88961 12.9041 10.5889 13.2353C11.2883 13.5664 12.0536 13.7347 12.8273 13.7275H14.9529L14.086 14.3746C13.9733 14.4729 13.9018 14.61 13.8858 14.7587C13.8698 14.9074 13.9105 15.0566 13.9997 15.1766C14.089 15.2966 14.2202 15.3785 14.3672 15.4059C14.5141 15.4334 14.6661 15.4043 14.7926 15.3246L17.1023 13.6087C17.176 13.5534 17.2359 13.4817 17.2771 13.3992C17.3183 13.3168 17.3398 13.2259 17.3398 13.1337C17.3398 13.0415 17.3183 12.9506 17.2771 12.8682C17.2359 12.7857 17.176 12.714 17.1023 12.6587L14.7926 10.9428Z" fill="white" />
@@ -63,7 +60,7 @@ const Dumbcharades = (props) => {
                 <span className="newSelectText">Get a new topic</span>
             </div>
             <div className='topicName'>
-                <span className="topicText">{selectedTopic}</span>
+                <span className="topicText">{props.selectedTopic}</span>
                 <div className="topicNavIcon_container" onClick={handleNewSelectClick}>
                     <svg className='topicNavIcon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 7" fill="none">
                         <path d="M9.875 1.3125L5.5 5.6875L1.125 1.3125" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -72,9 +69,9 @@ const Dumbcharades = (props) => {
             </div>
             <div className='emojiArea'>
                 <textarea className='emojiTextArea' placeholder='Enter emojis'
-                    style={{ resize: "none", whiteSpace: 'pre-wrap' }} value={textAreaValue}
+                    style={{ resize: "none", whiteSpace: 'pre-wrap' }} value={props.textAreaValue}
                     readOnly={true}
-                    onChange={(e) => setTextAreaValue(e.target.value)}>
+                    onChange={(e) => props.setTextAreaValue(e.target.value)}>
                 </textarea>
                 <div className='emojiAi'>
                     <svg className="emojiAiIcon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -88,12 +85,12 @@ const Dumbcharades = (props) => {
                 </div>
             </div>
             <EmojiKeyboard onEmojiClick={handleEmojiClick} removeLast={removeLast} />
-            <button className='nextForEmoji' style={{cursor:textAreaValue?'':'not-allowed'}} onClick={props. onforw}><span style={{opacity: textAreaValue?'1':'.3'}}>Next</span></button>
+            <button className='nextForEmoji' style={{cursor:props.textAreaValue?'':'not-allowed'}} onClick={props. onforw}><span style={{opacity: props.textAreaValue?'1':'.3'}}>Next</span></button>
             {isSlidebarOpen && <BottomSlidebar
                 isOpen={isSlidebarOpen} 
                 onClose={handleCloseSlidebar} 
                 onSelectTopic={handleSelectTopic} 
-                selectedTopic={selectedTopic}
+                selectedTopic={props.selectedTopic}
             /> }
         </div>
     )

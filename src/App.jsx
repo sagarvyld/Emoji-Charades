@@ -5,21 +5,32 @@ import Dumbcharades from "./Pages/dumbcharades";
 import SendPage from "./Pages/SendPage";
 function App() {
   const [gameIndex, setIndex] = useState(null);
+  const [textAreaValue, setTextAreaValue] = useState('');
+  const [selectedTopic, setSelectedTopic] = useState('Reservoir Dogs');
+  const [selectedTopicArea, setSelectedTopicArea] = useState('Movie');
   let content;
   switch (gameIndex) {
     case 0:
-      content = <Dumbcharades onClose={()=>{setIndex(null);}} onforw={()=>{setIndex(1)}}/>;
+      content = <Dumbcharades 
+      onClose={() => { setIndex(null); }} 
+      onforw={() => { setIndex(1) }} 
+      textAreaValue={textAreaValue} 
+      setTextAreaValue={setTextAreaValue} 
+      selectedTopic={selectedTopic} 
+      setSelectedTopic={setSelectedTopic} 
+      selectedTopicArea={selectedTopicArea} 
+      setSelectedTopicArea={setSelectedTopicArea} />;
       break;
     case 1:
-      content = <SendPage onBack={()=>{setIndex(0);}}/>;
+      content = <SendPage onBack={() => { setIndex(0); }} />;
       break;
     default:
-      content = <Landing onNext={()=>{setIndex(0);}}/>;
+      content = <Landing onNext={() => { setIndex(0); }} />;
   }
   return (
-  <div>
-    {content}
-  </div>
+    <div>
+      {content}
+    </div>
   );
 }
 
