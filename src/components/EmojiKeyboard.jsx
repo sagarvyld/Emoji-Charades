@@ -40,7 +40,7 @@ const EmojiKeyboard = ({ onEmojiClick , removeLast}) => {
                 </div>
                 <button 
                     className="emoji-space"
-                    onClick={() => onEmojiClick(' ')}
+                    onClick={() => onEmojiClick('  ')}
                 >
                     <span className='emoji-sc-content'>Space</span>
                 </button>

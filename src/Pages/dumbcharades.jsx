@@ -18,9 +18,9 @@ const Dumbcharades = (props) => {
         setTextAreaValue(prevValue => {
             if (prevValue.length === 0) return '';
             const codePoint = prevValue.codePointAt(prevValue.length - 1);
-            return codePoint !== 32
-                ? prevValue.slice(0, -2)
-                : prevValue.slice(0, -1);
+            return prevValue.slice(0, -2);
+            // codePoint !== 32
+            //     ? prevValue.slice(0, -2)
         });
     };
 
@@ -88,7 +88,7 @@ const Dumbcharades = (props) => {
                 </div>
             </div>
             <EmojiKeyboard onEmojiClick={handleEmojiClick} removeLast={removeLast} />
-            <button className='nextForEmoji'>Next</button>
+            <button className='nextForEmoji' style={{cursor:textAreaValue?'':'not-allowed'}}><span style={{opacity: textAreaValue?'1':'.3'}}>Next</span></button>
             {isSlidebarOpen && <BottomSlidebar
                 isOpen={isSlidebarOpen} 
                 onClose={handleCloseSlidebar} 
