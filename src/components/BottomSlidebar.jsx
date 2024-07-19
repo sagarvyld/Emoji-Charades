@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './bottomSlidebar.css';
 
 const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic }) => {
     const topics = ['I don’t want any prompt', 'Inception', 'Can we talk about', 'Rate my fit', 'Reservoir Dogs', 'The Dark Knight', 'A daily essential', 'Interstellar', 'Pulp Fiction', 'Cook with me'];
     const [searchTerm, setSearchTerm] = useState('');
+    const [slidebarHeight, setSlidebarHeight] = useState('50vh');
+    const slidebarRef = useRef(null);
+    const isResizingRef = useRef(false);
 
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);
@@ -13,11 +16,56 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic }) => {
         topic.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+    useEffect(() => {
+        const handleMove = (e) => {
+            if (isResizingRef.current) {
+                const clientY = e.clientY || e.touches[0].clientY;
+                const newHeight = Math.min(Math.max(window.innerHeight - clientY, 200), window.innerHeight * 0.8);
+                setSlidebarHeight(`${newHeight}px`);
+            }
+        };
+
+        const handleUp = () => {
+            isResizingRef.current = false;
+            document.removeEventListener('mousemove', handleMove);
+            document.removeEventListener('mouseup', handleUp);
+            document.removeEventListener('touchmove', handleMove);
+            document.removeEventListener('touchend', handleUp);
+
+            if (slidebarRef.current.offsetHeight < window.innerHeight * 0.2) {
+                onClose();
+            }
+        };
+
+        const handleDown = (e) => {
+            isResizingRef.current = true;
+            document.addEventListener('mousemove', handleMove);
+            document.addEventListener('mouseup', handleUp);
+            document.addEventListener('touchmove', handleMove);
+            document.addEventListener('touchend', handleUp);
+        };
+
+        const dragHandle = slidebarRef.current.querySelector('.dragHandle');
+        dragHandle.addEventListener('mousedown', handleDown);
+        dragHandle.addEventListener('touchstart', handleDown);
+
+        return () => {
+            dragHandle.removeEventListener('mousedown', handleDown);
+            dragHandle.removeEventListener('touchstart', handleDown);
+        };
+    }, [onClose]);
+
+    useEffect(() => {
+        if (!isOpen) {
+            setSlidebarHeight('50vh');
+        }
+    }, [isOpen]);
+
     return (
-        <div className={`bottomSlidebar ${isOpen ? 'open' : ''}`}>
+        <div ref={slidebarRef} className={`bottomSlidebar ${isOpen ? 'open' : ''}`} style={{ height: slidebarHeight }}>
+            <div className='dragHandle'></div>
             <div className='slidebarHeader'>
                 <span className='slidebar_heading'>Movies</span>
-                <button className='closeBtn' onClick={onClose}>X</button>
             </div>
             <div className='searchBarContainer'>
                 <svg className='searchIcon' xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">

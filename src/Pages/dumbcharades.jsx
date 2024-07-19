@@ -54,9 +54,9 @@ const Dumbcharades = (props) => {
                 </svg>
                 <span className="newSelectText">Get a new topic</span>
             </div>
-            <div className='topicName'>
+            <div className='topicName' onClick={handleNewSelectClick}>
                 <span className="topicText">{props.selectedTopic}</span>
-                <div className="topicNavIcon_container" onClick={handleNewSelectClick}>
+                <div className="topicNavIcon_container">
                     <svg className='topicNavIcon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 7" fill="none">
                         <path d="M9.875 1.3125L5.5 5.6875L1.125 1.3125" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
