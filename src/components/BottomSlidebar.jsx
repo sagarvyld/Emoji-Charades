@@ -1,13 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import './bottomSlidebar.css';
 
 const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic }) => {
     const topics = ['I don’t want any prompt', 'Inception', 'Can we talk about', 'Rate my fit', 'Reservoir Dogs', 'The Dark Knight', 'A daily essential', 'Interstellar', 'Pulp Fiction', 'Cook with me'];
     const [searchTerm, setSearchTerm] = useState('');
-    const [slidebarHeight, setSlidebarHeight] = useState('50vh');
-    const slidebarRef = useRef(null);
-    const isDraggingRef = useRef(false);
-    const startYRef = useRef(0);
 
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);
@@ -17,48 +13,39 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic }) => {
         topic.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    const handleMove = (e) => {
-        e.preventDefault(); 
-        const clientY = e.clientY || e.touches[0].clientY;
-        const height = window.innerHeight - clientY;
-        if (height < 200) {
-            setSlidebarHeight('0px');
-            setIsDragging(false);
-            onClose();
-        } else {
-            setSlidebarHeight(`${Math.min(Math.max(height, 200), window.innerHeight * 0.8)}px`);
-        }
-    };
+    const handleDragStart = (event) => {
+        const slidebar = document.querySelector('.bottomSlidebar');
+        const startY = event.clientY || event.touches[0].clientY;
+        const startHeight = slidebar.getBoundingClientRect().height;
 
-    const handleEnd = () => {
-        setIsDragging(false);
-        document.removeEventListener('mousemove', handleMove);
-        document.removeEventListener('mouseup', handleEnd);
-        document.removeEventListener('touchmove', handleMove);
-        document.removeEventListener('touchend', handleEnd);
-    };
+        const onDragMove = (moveEvent) => {
+            const currentY = moveEvent.clientY || moveEvent.touches[0].clientY;
+            const newHeight = startHeight - (currentY - startY);
+            slidebar.style.height = `${newHeight}px`;
+            if (newHeight <= window.innerHeight * 0.1) {
+                onClose();
+            }
+        };
 
-    const handleStart = (e) => {
-        e.preventDefault(); // Prevent default behavior for smooth dragging
-        isDraggingRef.current = true;
-        startYRef.current = e.clientY || e.touches[0].clientY;
-        document.addEventListener('mousemove', handleMove);
-        document.addEventListener('mouseup', handleEnd);
-        document.addEventListener('touchmove', handleMove);
-        document.addEventListener('touchend', handleEnd);
-    };
+        const onDragEnd = () => {
+            document.removeEventListener('mousemove', onDragMove);
+            document.removeEventListener('mouseup', onDragEnd);
+            document.removeEventListener('touchmove', onDragMove);
+            document.removeEventListener('touchend', onDragEnd);
+        };
 
-    useEffect(() => {
-        if (!isOpen) {
-            setSlidebarHeight('50vh');
-        }
-    }, [isOpen]);
+        document.addEventListener('mousemove', onDragMove);
+        document.addEventListener('mouseup', onDragEnd);
+        document.addEventListener('touchmove', onDragMove);
+        document.addEventListener('touchend', onDragEnd);
+    };
 
     return (
-        <div ref={slidebarRef} className={`bottomSlidebar ${isOpen ? 'open' : ''}`} style={{ height: slidebarHeight }}>
-            <div className='dragHandle' onMouseDown={handleStart} onTouchStart={handleStart}></div>
+        <div className={`bottomSlidebar ${isOpen ? 'open' : ''}`}>
             <div className='slidebarHeader'>
                 <span className='slidebar_heading'>Movies</span>
+                <button className='closeBtn' onClick={onClose}>X</button>
+                <div className='dragHandle' onMouseDown={handleDragStart} onTouchStart={handleDragStart}></div>
             </div>
             <div className='searchBarContainer'>
                 <svg className='searchIcon' xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
