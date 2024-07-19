@@ -85,7 +85,12 @@ const Dumbcharades = (props) => {
                 </div>
             </div>
             <EmojiKeyboard onEmojiClick={handleEmojiClick} removeLast={removeLast} />
-            <button className='nextForEmoji' style={{cursor:props.textAreaValue?'':'not-allowed'}} onClick={props. onforw}><span style={{opacity: props.textAreaValue?'1':'.3'}}>Next</span></button>
+            <button 
+            className='nextForEmoji' 
+            style={{ cursor: props.textAreaValue ? '' : 'not-allowed' }} 
+            onClick={props.textAreaValue ? props.onforw : null}>
+                <span style={{opacity: props.textAreaValue?'1':'0.3' }}>Next</span>
+            </button>
             {isSlidebarOpen && <BottomSlidebar
                 isOpen={isSlidebarOpen} 
                 onClose={handleCloseSlidebar} 
