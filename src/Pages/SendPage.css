@@ -73,3 +73,55 @@
   font-weight: 500;
   line-height: 100%; 
 }
+
+
+.nxtbtntp {
+
+  display: flex;
+
+  /* width: 13.625rem; */
+
+  width: 56.5vw;
+
+  height: 5.6vh;
+
+  padding: 0.9375rem 2rem;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 0.625rem;
+
+  border: 0px;
+
+  border-radius: 0.75rem;
+
+  background: var(--Primary-Primary-100, #c6ff00);
+
+  position: fixed;
+
+  bottom: 2rem;
+
+  /* cursor: not-allowed; */
+
+}
+
+
+.nxtbtntp-txt {
+
+  color: var(--Neutral-Rich-Dark, #090909);
+
+  font-family: Gilroy;
+
+  font-size: 0.875rem;
+
+  font-style: normal;
+
+  font-weight: 700;
+
+  line-height: 100%;
+
+  /* opacity: 0.3; */
+
+}
