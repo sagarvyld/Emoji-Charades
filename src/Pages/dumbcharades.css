@@ -99,13 +99,14 @@
   box-sizing: border-box;
   padding-top: 33px;
   padding-left: 16px;
-  font-family: Gilroy;
   font-size: 1.6rem;
-  font-style: normal;
   font-weight: 600;
   line-height: 120%;
   border-radius: var(--large, 12px);
   background: var(--Dark-Dark--60, #526175);
+  font-family: "Noto Color Emoji","Gilroy";
+  /* font-weight: 400; */
+  font-style: normal;
 }
 
 .emojiTextArea::placeholder {

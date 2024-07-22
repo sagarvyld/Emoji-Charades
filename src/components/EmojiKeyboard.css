@@ -28,6 +28,9 @@
   width: 12vw;
   height: 3.5vh;
   flex-shrink: 0;
+  font-family: "Noto Color Emoji", sans-serif;
+  font-weight: 400;
+  font-style: normal;
   /* box-shadow: 0px -1.353px 2.706px 0px rgba(255, 255, 255, 0.4) inset, 0px 2.706px 2.706px 0px #fff inset;
   filter: drop-shadow(0px 6.765px 0px rgba(0, 0, 0, 0.08)); */
 }
