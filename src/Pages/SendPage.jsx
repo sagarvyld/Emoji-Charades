@@ -3,7 +3,6 @@ import './SendPage.css';
 import AddNote from '../components/AddNote';
 
 const SendPage = (props) => {
-    const [textareaValue, setTextareaValue] = useState('');
 
     return (
         <div className='sendPage_EC'>
@@ -16,7 +15,7 @@ const SendPage = (props) => {
             <div className='msgSubheading'><span>Add your personal touch to the activity
                 before you send..</span></div>
             <div className="sendinfoDiv"><span>Guess the {props.selectedTopicArea}</span><span className='s2'>{props.textAreaValue}</span></div>
-            <AddNote textareaValue={textareaValue} setTextareaValue={setTextareaValue} />
+            <AddNote textareaValue={props.textareaValueMsg} setTextareaValue={props.setTextareaValueMsg} />
             <button className={`nxtbtntp`} ><span className={`nxtbtntp-txt`}>Send</span></button>
         </div>
     )

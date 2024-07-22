@@ -8,6 +8,8 @@ function App() {
   const [textAreaValue, setTextAreaValue] = useState('');
   const [selectedTopic, setSelectedTopic] = useState('Reservoir Dogs');
   const [selectedTopicArea, setSelectedTopicArea] = useState('Movie');
+  const [textareaValueMsg, setTextareaValueMsg] = useState('');
+
   let content;
   switch (gameIndex) {
     case 0:
@@ -22,7 +24,11 @@ function App() {
       setSelectedTopicArea={setSelectedTopicArea} />;
       break;
     case 1:
-      content = <SendPage selectedTopicArea={selectedTopicArea}  textAreaValue={textAreaValue} onBack={() => { setIndex(0); }} />;
+      content = <SendPage selectedTopicArea={selectedTopicArea}  
+                          textAreaValue={textAreaValue} 
+                          textareaValueMsg={textareaValueMsg}
+                          setTextareaValueMsg={setTextareaValueMsg}
+                          onBack={() => { setIndex(0); }} />;
       break;
     default:
       content = <Landing onNext={() => { setIndex(0); }} />;

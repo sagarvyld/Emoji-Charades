@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './bottomSlidebar.css';
 
-const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic }) => {
+const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selectedTopicArea }) => {
     const topics = ['I don’t want any prompt', 'Inception', 'Can we talk about', 'Rate my fit', 'Reservoir Dogs', 'The Dark Knight', 'A daily essential', 'Interstellar', 'Pulp Fiction', 'Cook with me'];
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -77,7 +77,7 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic }) => {
     return (
         <div className={`bottomSlidebar ${isOpen ? 'open' : ''}`}>
             <div className='slidebarHeader' onMouseDown={handleDragStart} onTouchStart={handleDragStart}>
-                <span className='slidebar_heading'>{selectedTopic}</span>
+                <span className='slidebar_heading'>{selectedTopicArea}</span>
                 {/* <button className='closeBtn' onClick={onClose}>X</button> */}
                 <div className='dragHandle'></div>
             </div>
