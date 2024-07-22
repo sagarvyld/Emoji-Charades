@@ -44,7 +44,7 @@ const Dumbcharades = (props) => {
     };
     
     const removeLast = () => {
-        const currentPosition = cursorPosition || props.textAreaValue.length;
+        const currentPosition = cursorPosition;
         if (currentPosition > 0) {
         const newValue = props.textAreaValue.slice(0, currentPosition - 2) + props.textAreaValue.slice(currentPosition);
         props.setTextAreaValue(prevValue => {
@@ -54,6 +54,7 @@ const Dumbcharades = (props) => {
         setCursorPosition(currentPosition - 2);
      }
     };
+    
 
     const handleNewSelectClick = () => {
         setIsSlidebarOpen(true);
