@@ -8,7 +8,7 @@ const Dumbcharades = (props) => {
     const [cursorPosition, setCursorPosition] = useState(null);
     const contentEditableRef = useRef(null);
 
-    const TopicAreas = ['Movie','Music','Sports','Literature','Books','Drama', 'Story', 'Poetry']
+    const TopicAreas = ['Movie', 'Music', 'Sports', 'Literature', 'Books', 'Drama', 'Story', 'Poetry']
 
     useEffect(() => {
         if (cursorPosition !== null) {
@@ -29,7 +29,7 @@ const Dumbcharades = (props) => {
             props.setTextAreaValue(value);
         }
     }
-    
+
 
     const handleEmojiClick = (emoji) => {
         const currentPosition = cursorPosition || 0;
@@ -42,19 +42,19 @@ const Dumbcharades = (props) => {
             return newValue;
         });
     };
-    
+
     const removeLast = () => {
         const currentPosition = cursorPosition;
         if (currentPosition > 0) {
-        const newValue = props.textAreaValue.slice(0, currentPosition - 2) + props.textAreaValue.slice(currentPosition);
-        props.setTextAreaValue(prevValue => {
-            if (prevValue.length === 0) return '';
-            return newValue;
-        });
-        setCursorPosition(currentPosition - 2);
-     }
+            const newValue = props.textAreaValue.slice(0, currentPosition - 2) + props.textAreaValue.slice(currentPosition);
+            props.setTextAreaValue(prevValue => {
+                if (prevValue.length === 0) return '';
+                return newValue;
+            });
+            setCursorPosition(currentPosition - 2);
+        }
     };
-    
+
 
     const handleNewSelectClick = () => {
         setIsSlidebarOpen(true);
@@ -80,7 +80,7 @@ const Dumbcharades = (props) => {
     const handleInput = (event) => {
         event.preventDefault();
     };
-    const handleKeyDown=(e)=>{
+    const handleKeyDown = (e) => {
         e.preventDefault();
     }
 
@@ -116,9 +116,12 @@ const Dumbcharades = (props) => {
             </div>
             <div className='emojiArea'>
                 <div className='emojiTextArea' ref={contentEditableRef} contentEditable
-                onKeyDown={handleKeyDown} 
-                data-placeholder="Enter emojis"
-                value={props.textAreaValue}
+                    onKeyDown={handleKeyDown}
+                    readOnly={true}
+                    data-placeholder="Enter emojis"
+                    value={props.textAreaValue}
+                    inputMode="none"
+                    onTouchStart={(e) => e.preventDefault()}
                     onInput={handleInput} onSelect={handleSelect} style={{ resize: "none", whiteSpace: 'pre-wrap', overflowY: 'auto' }}>
                     {props.textAreaValue}
                 </div>
@@ -134,19 +137,19 @@ const Dumbcharades = (props) => {
                 </div>
             </div>
             <EmojiKeyboard onEmojiClick={handleEmojiClick} removeLast={removeLast} />
-            <button 
-            className='nextForEmoji' 
-            style={{ cursor: props.textAreaValue ? '' : 'not-allowed' }} 
-            onClick={props.textAreaValue ? props.onforw : null}>
-                <span style={{opacity: props.textAreaValue?'1':'0.3' }}>Next</span>
+            <button
+                className='nextForEmoji'
+                style={{ cursor: props.textAreaValue ? '' : 'not-allowed' }}
+                onClick={props.textAreaValue ? props.onforw : null}>
+                <span style={{ opacity: props.textAreaValue ? '1' : '0.3' }}>Next</span>
             </button>
             {isSlidebarOpen && <BottomSlidebar
-                isOpen={isSlidebarOpen} 
-                onClose={handleCloseSlidebar} 
-                onSelectTopic={handleSelectTopic} 
+                isOpen={isSlidebarOpen}
+                onClose={handleCloseSlidebar}
+                onSelectTopic={handleSelectTopic}
                 selectedTopic={props.selectedTopic}
                 selectedTopicArea={props.selectedTopicArea}
-            /> }
+            />}
         </div>
     )
 }
