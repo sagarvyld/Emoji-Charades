@@ -109,6 +109,19 @@
   font-style: normal;
 }
 
+.emojiTextArea[data-placeholder]:empty::before {
+  content: attr(data-placeholder);
+  color: var(--Neutral-Light-alpha-50, rgba(255, 255, 255, 0.5));
+  text-align: left;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Gilroy;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+}
+
+
 .emojiTextArea::placeholder {
   color: var(--Neutral-Light-alpha-50, rgba(255, 255, 255, 0.5));
   text-align: left;

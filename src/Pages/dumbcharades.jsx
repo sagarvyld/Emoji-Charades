@@ -79,6 +79,9 @@ const Dumbcharades = (props) => {
     const handleInput = (event) => {
         event.preventDefault();
     };
+    const handleKeyDown=(e)=>{
+        e.preventDefault();
+    }
 
     const handleSelect = () => {
         const selection = window.getSelection();
@@ -111,12 +114,10 @@ const Dumbcharades = (props) => {
                 </div>
             </div>
             <div className='emojiArea'>
-                {/* <textarea className='emojiTextArea' placeholder='Enter emojis'
-                    style={{ resize: "none", whiteSpace: 'pre-wrap' }} value={props.textAreaValue}
-                    readOnly={true}
-                    onChange={handleEmojiTextChange}>
-                </textarea> */}
                 <div className='emojiTextArea' ref={contentEditableRef} contentEditable
+                onKeyDown={handleKeyDown} 
+                data-placeholder="Enter emojis"
+                value={props.textAreaValue}
                     onInput={handleInput} onSelect={handleSelect} style={{ resize: "none", whiteSpace: 'pre-wrap', overflowY: 'auto' }}>
                     {props.textAreaValue}
                 </div>
