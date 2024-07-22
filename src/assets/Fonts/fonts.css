@@ -2,6 +2,10 @@
     font-family: 'Saira SemiCondensed';
     src: url('./SairaSemiCondensed-Regular.ttf') format('opentype');
 }
+@font-face {
+    font-family: 'Saira SemiCondensed Bold';
+    src: url('./SairaSemiCondensed-Bold.ttf') format('opentype');
+}
 
 
 @font-face {
