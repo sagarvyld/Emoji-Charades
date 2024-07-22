@@ -61,9 +61,9 @@
 .Landing_start {
     font-weight: 700;
     display: flex;
-    width: 13.625rem;
-    /* width:52.76vw;
-    height: 5.9vh; */
+    /* width: 13.625rem; */
+    width:12.8rem;
+    /* height: 5.9vh; */
     padding: 0.9375rem 2rem;
     justify-content: center;
     align-items: center;
@@ -86,6 +86,7 @@
     color: var(--Light-Light--100, #FFF);
     font-family: Gilroy;
     font-size: 14px;
+    /* min-width:52.76vw; */
     font-style: normal;
     font-weight: 700;
     line-height: 100%;
