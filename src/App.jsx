@@ -22,7 +22,7 @@ function App() {
       setSelectedTopicArea={setSelectedTopicArea} />;
       break;
     case 1:
-      content = <SendPage onBack={() => { setIndex(0); }} />;
+      content = <SendPage selectedTopicArea={selectedTopicArea}  textAreaValue={textAreaValue} onBack={() => { setIndex(0); }} />;
       break;
     default:
       content = <Landing onNext={() => { setIndex(0); }} />;

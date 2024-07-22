@@ -77,7 +77,7 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic }) => {
     return (
         <div className={`bottomSlidebar ${isOpen ? 'open' : ''}`}>
             <div className='slidebarHeader' onMouseDown={handleDragStart} onTouchStart={handleDragStart}>
-                <span className='slidebar_heading'>Movies</span>
+                <span className='slidebar_heading'>{selectedTopic}</span>
                 {/* <button className='closeBtn' onClick={onClose}>X</button> */}
                 <div className='dragHandle'></div>
             </div>
