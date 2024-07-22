@@ -12,7 +12,7 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selecte
             setTimeout(() => {
                 setClosing(false);
                 onClose();
-            }, 500); // Match the duration of the slide-out animation
+            }, 500); 
         }
     }, [isOpen, onClose]);
 
