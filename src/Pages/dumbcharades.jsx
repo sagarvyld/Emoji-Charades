@@ -23,12 +23,12 @@ const Dumbcharades = (props) => {
     }, [props.textAreaValue, cursorPosition]);
 
 
-    function handleEmojiTextChange(event) {
-        let value = event.target.value;
-        if (!(textAreaValue.length === 0 && value[0] === '  ')) {
-            props.setTextAreaValue(value);
-        }
-    }
+    // function handleEmojiTextChange(event) {
+    //     let value = event.target.value;
+    //     if (!(textAreaValue.length === 0 && value[0] === '  ')) {
+    //         props.setTextAreaValue(value);
+    //     }
+    // }
 
 
     const handleEmojiClick = (emoji) => {
