@@ -75,18 +75,16 @@
   font-size: 17px;
   font-style: normal;
   font-weight: 500;
-  line-height: 100%; 
+  line-height: 100%;
 }
-.sendinfoDiv .s2{
+.sendinfoDiv .s2 {
   font-size: 2rem;
   font-family: "Noto Color Emoji";
   font-weight: 400;
   font-style: normal;
 }
 
-
 .nxtbtntp {
-
   display: flex;
 
   /* width: 13.625rem; */
@@ -114,12 +112,9 @@
   bottom: 2rem;
 
   /* cursor: not-allowed; */
-
 }
 
-
 .nxtbtntp-txt {
-
   color: var(--Neutral-Rich-Dark, #090909);
 
   font-family: Gilroy;
@@ -133,5 +128,50 @@
   line-height: 100%;
 
   /* opacity: 0.3; */
-
+}
+.star1_EC {
+  position: fixed;
+  top: 16rem;
+  right: 3rem;
+  width: 14px;
+  height: 14px;
+  transform: rotate(-24.285deg);
+  flex-shrink: 0;
+  stroke-width: 1px;
+  stroke: var(--Neutral-Light, #fff);
+  z-index: 5;
+}
+.star2_EC {
+  position: fixed;
+  top: 14.5rem;
+  left: 4rem;
+  width: 14px;
+  height: 14px;
+  transform: rotate(-24.285deg);
+  flex-shrink: 0;
+  fill: var(--Accent-color-Acc-03, #ffe604);
+  z-index: 5;
+}
+.star3_EC {
+  position: fixed;
+  bottom: 15rem;
+  left: 5rem;
+  width: 14px;
+  height: 14px;
+  transform: rotate(-24.285deg);
+  flex-shrink: 0;
+  stroke-width: 1px;
+  stroke: var(--Accent-color-Acc-06, #bef229);
+  z-index: 5;
+}
+.star4_EC {
+  position: fixed;
+  right: 5rem;
+  bottom: 13rem;
+  width: 21.501px;
+  height: 21.501px;
+  transform: rotate(-24.285deg);
+  flex-shrink: 0;
+  stroke-width: 2px;
+  stroke: var(--Neutral-Light, #fff);
 }
