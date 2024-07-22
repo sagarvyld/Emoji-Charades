@@ -1,12 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './dumbcharades.css';
 import EmojiKeyboard from '../components/EmojiKeyboard';
 import BottomSlidebar from '../components/BottomSlidebar';
 
 const Dumbcharades = (props) => {
     const [isSlidebarOpen, setIsSlidebarOpen] = useState(false);
+    const [cursorPosition, setCursorPosition] = useState(null);
+    const contentEditableRef = useRef(null);
 
     const TopicAreas = ['Movie','Music','Sports','Literature','Books','Drama', 'Story', 'Poetry']
+
+    useEffect(() => {
+        if (cursorPosition !== null) {
+            const range = document.createRange();
+            const selection = window.getSelection();
+            range.setStart(contentEditableRef.current.childNodes[0] || contentEditableRef.current, cursorPosition);
+            range.collapse(true);
+            selection.removeAllRanges();
+            selection.addRange(range);
+            contentEditableRef.current.focus();
+        }
+    }, [props.textAreaValue, cursorPosition]);
 
 
     function handleEmojiTextChange(event) {
@@ -18,19 +32,27 @@ const Dumbcharades = (props) => {
     
 
     const handleEmojiClick = (emoji) => {
+        const currentPosition = cursorPosition || 0;
+        const newValue = [props.textAreaValue.slice(0, currentPosition), emoji, props.textAreaValue.slice(currentPosition)].join('');
         props.setTextAreaValue(prevValue => {
             if (prevValue.length === 0 && emoji === '  ') {
                 return prevValue; // Don't add space if it's the first character
             }
-            return prevValue + emoji;
+            setCursorPosition(currentPosition + emoji.length);
+            return newValue;
         });
     };
     
     const removeLast = () => {
+        const currentPosition = cursorPosition || props.textAreaValue.length;
+        if (currentPosition > 0) {
+        const newValue = props.textAreaValue.slice(0, currentPosition - 2) + props.textAreaValue.slice(currentPosition);
         props.setTextAreaValue(prevValue => {
             if (prevValue.length === 0) return '';
-            return prevValue.slice(0, -2);
+            return newValue;
         });
+        setCursorPosition(currentPosition - 2);
+     }
     };
 
     const handleNewSelectClick = () => {
@@ -52,6 +74,17 @@ const Dumbcharades = (props) => {
             newTopicArea = TopicAreas[randomIndex];
         } while (newTopicArea === props.selectedTopicArea);
         props.setSelectedTopicArea(newTopicArea);
+    };
+
+    const handleInput = (event) => {
+        event.preventDefault();
+    };
+
+    const handleSelect = () => {
+        const selection = window.getSelection();
+        if (selection.rangeCount > 0) {
+            setCursorPosition(selection.getRangeAt(0).startOffset);
+        }
     };
 
     return (
@@ -78,11 +111,15 @@ const Dumbcharades = (props) => {
                 </div>
             </div>
             <div className='emojiArea'>
-                <textarea className='emojiTextArea' placeholder='Enter emojis'
+                {/* <textarea className='emojiTextArea' placeholder='Enter emojis'
                     style={{ resize: "none", whiteSpace: 'pre-wrap' }} value={props.textAreaValue}
                     readOnly={true}
                     onChange={handleEmojiTextChange}>
-                </textarea>
+                </textarea> */}
+                <div className='emojiTextArea' ref={contentEditableRef} contentEditable
+                    onInput={handleInput} onSelect={handleSelect} style={{ resize: "none", whiteSpace: 'pre-wrap', overflowY: 'auto' }}>
+                    {props.textAreaValue}
+                </div>
                 <div className='emojiAi'>
                     <svg className="emojiAiIcon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                         <path d="M11.375 4.37503L10.5059 5.2442L8.75586 3.4942L9.62503 2.62503C9.87003 2.38003 10.185 2.26337 10.5 2.26337C10.815 2.26337 11.13 2.38003 11.375 2.62503C11.8592 3.1092 11.8592 3.89087 11.375 4.37503Z" fill="#161716" />
