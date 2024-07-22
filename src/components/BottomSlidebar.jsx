@@ -1,9 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './bottomSlidebar.css';
 
 const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selectedTopicArea }) => {
     const topics = ['I don’t want any prompt', 'Inception', 'Can we talk about', 'Rate my fit', 'Reservoir Dogs', 'The Dark Knight', 'A daily essential', 'Interstellar', 'Pulp Fiction', 'Cook with me'];
     const [searchTerm, setSearchTerm] = useState('');
+    const [closing, setClosing] = useState(false);
+
+    useEffect(() => {
+        if (!isOpen) {
+            setClosing(true);
+            setTimeout(() => {
+                setClosing(false);
+                onClose();
+            }, 500); // Match the duration of the slide-out animation
+        }
+    }, [isOpen, onClose]);
 
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);
@@ -13,40 +24,12 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selecte
         topic.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // const handleDragStart = (event) => {
-    //     console.log("hey hi");
-    //     const slidebar = document.querySelector('.bottomSlidebar');
-    //     const startY = event.clientY || event.touches[0].clientY;
-    //     const startHeight = slidebar.getBoundingClientRect().height;
-
-    //     const onDragMove = (moveEvent) => {
-    //         const currentY = moveEvent.clientY || moveEvent.touches[0].clientY;
-    //         const newHeight = startHeight - (currentY - startY);
-    //         slidebar.style.height = `${newHeight}px`;
-    //         if (newHeight <= window.innerHeight * 0.1) {
-    //             onClose();
-    //         }
-    //     };
-
-    //     const onDragEnd = () => {
-    //         document.removeEventListener('mousemove', onDragMove);
-    //         document.removeEventListener('mouseup', onDragEnd);
-    //         document.removeEventListener('touchmove', onDragMove);
-    //         document.removeEventListener('touchend', onDragEnd);
-    //     };
-
-    //     document.addEventListener('mousemove', onDragMove);
-    //     document.addEventListener('mouseup', onDragEnd);
-    //     document.addEventListener('touchmove', onDragMove);
-    //     document.addEventListener('touchend', onDragEnd);
-    // };
-
     const handleDragStart = (event) => {
         const slidebar = document.querySelector('.bottomSlidebar');
         const startY = event.clientY || event.touches[0].clientY;
         const startHeight = slidebar.getBoundingClientRect().height;
-        const upperLimit = window.innerHeight * 0.9; // 80vh
-        const lowerLimit = window.innerHeight * 0.5; // 50vh
+        const upperLimit = window.innerHeight * 0.95;
+        const lowerLimit = window.innerHeight * 0.5;
 
         const onDragMove = (moveEvent) => {
             const currentY = moveEvent.clientY || moveEvent.touches[0].clientY;
@@ -55,7 +38,11 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selecte
             if (newHeight >= upperLimit) {
                 slidebar.style.height = `${upperLimit}px`;
             } else if (newHeight <= lowerLimit) {
-                onClose();
+                setClosing(true);
+                setTimeout(() => {
+                    setClosing(false);
+                    onClose();
+                }, 500);
             } else {
                 slidebar.style.height = `${newHeight}px`;
             }
@@ -75,10 +62,9 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selecte
     };
 
     return (
-        <div className={`bottomSlidebar ${isOpen ? 'open' : ''}`}>
+        <div className={`bottomSlidebar ${isOpen && !closing ? 'open' : ''} ${closing ? 'close' : ''}`}>
             <div className='slidebarHeader' onMouseDown={handleDragStart} onTouchStart={handleDragStart}>
                 <span className='slidebar_heading'>{selectedTopicArea}</span>
-                {/* <button className='closeBtn' onClick={onClose}>X</button> */}
                 <div className='dragHandle'></div>
             </div>
             <div className='searchBarContainer'>
