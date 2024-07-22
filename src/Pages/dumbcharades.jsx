@@ -8,9 +8,24 @@ const Dumbcharades = (props) => {
 
     const TopicAreas = ['Movie','Music','Sports','Literature','Books','Drama', 'Story', 'Poetry']
 
+
+    function handleEmojiTextChange(event) {
+        let value = event.target.value;
+        if (!(textAreaValue.length === 0 && value[0] === '  ')) {
+            props.setTextAreaValue(value);
+        }
+    }
+    
+
     const handleEmojiClick = (emoji) => {
-        props.setTextAreaValue(prevValue => prevValue + emoji);
+        props.setTextAreaValue(prevValue => {
+            if (prevValue.length === 0 && emoji === '  ') {
+                return prevValue; // Don't add space if it's the first character
+            }
+            return prevValue + emoji;
+        });
     };
+    
     const removeLast = () => {
         props.setTextAreaValue(prevValue => {
             if (prevValue.length === 0) return '';
@@ -66,7 +81,7 @@ const Dumbcharades = (props) => {
                 <textarea className='emojiTextArea' placeholder='Enter emojis'
                     style={{ resize: "none", whiteSpace: 'pre-wrap' }} value={props.textAreaValue}
                     readOnly={true}
-                    onChange={(e) => props.setTextAreaValue(e.target.value)}>
+                    onChange={handleEmojiTextChange}>
                 </textarea>
                 <div className='emojiAi'>
                     <svg className="emojiAiIcon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
