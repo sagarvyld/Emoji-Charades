@@ -12,7 +12,7 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selecte
             setTimeout(() => {
                 setClosing(false);
                 onClose();
-            }, 500); 
+            }, 500); // Match the duration of the slide-out animation
         }
     }, [isOpen, onClose]);
 
@@ -37,18 +37,23 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selecte
 
             if (newHeight >= upperLimit) {
                 slidebar.style.height = `${upperLimit}px`;
-            } else if (newHeight <= lowerLimit) {
-                setClosing(true);
-                setTimeout(() => {
-                    setClosing(false);
-                    onClose();
-                }, 500);
             } else {
                 slidebar.style.height = `${newHeight}px`;
             }
         };
 
-        const onDragEnd = () => {
+        const onDragEnd = (endEvent) => {
+            const endY = endEvent.clientY || endEvent.changedTouches[0].clientY;
+            const endHeight = startHeight - (endY - startY);
+
+            if (endHeight <= lowerLimit) {
+                setClosing(true);
+                setTimeout(() => {
+                    setClosing(false);
+                    onClose();
+                }, 500);
+            }
+
             document.removeEventListener('mousemove', onDragMove);
             document.removeEventListener('mouseup', onDragEnd);
             document.removeEventListener('touchmove', onDragMove);
