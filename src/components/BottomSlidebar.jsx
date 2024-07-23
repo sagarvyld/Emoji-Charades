@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './bottomSlidebar.css';
 
-const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selectedTopicArea , prompts}) => {
+const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selectedTopicArea, prompts }) => {
     const topics = prompts;
     const [searchTerm, setSearchTerm] = useState('');
     const [closing, setClosing] = useState(false);
@@ -63,7 +63,9 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selecte
         const startY = event.clientY || event.touches[0].clientY;
         const startHeight = slidebar.getBoundingClientRect().height;
         const upperLimit = window.innerHeight * 0.95;
-        const midLimit = window.innerHeight * 0.7;
+        const midLimit = window.innerHeight * 0.78;
+        const s1 = window.innerHeight * 0.64;
+        const s2 = window.innerHeight * 0.85;
         const lowerLimit = window.innerHeight * 0.5;
 
         const onDragMove = (moveEvent) => {
@@ -81,22 +83,34 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selecte
             const endY = endEvent.clientY || endEvent.changedTouches[0].clientY;
             const endHeight = startHeight - (endY - startY);
             slidebar.style.transition = 'height 0.5s ease';
-        
-            if (endHeight <= midLimit) {
+
+            if (endHeight <= s1) {
                 slidebar.style.height = `${lowerLimit}px`;
+
+                setTimeout(() => {
+                    slidebar.style.transition = '';
+                }, 500);
+            }else if((endHeight > s1)&&(endHeight <= midLimit)){
+                slidebar.style.height = `${midLimit}px`;
                 
                 setTimeout(() => {
                     slidebar.style.transition = '';
                 }, 500);
-            } else {
+            }else if((endHeight > midLimit)&&(endHeight <= s2)){
+                slidebar.style.height = `${midLimit}px`;
+
+                setTimeout(() => {
+                    slidebar.style.transition = '';
+                }, 500);
+            }else {
                 slidebar.style.height = `${upperLimit}px`;
-                
+
                 setTimeout(() => {
                     slidebar.style.transition = '';
                 }, 500);
             }
 
-        
+
             if (endHeight <= lowerLimit) {
                 setClosing(true);
                 setTimeout(() => {
@@ -104,13 +118,13 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selecte
                     onClose();
                 }, 500);
             }
-        
+
             document.removeEventListener('mousemove', onDragMove);
             document.removeEventListener('mouseup', onDragEnd);
             document.removeEventListener('touchmove', onDragMove);
             document.removeEventListener('touchend', onDragEnd);
         };
-        
+
 
         document.addEventListener('mousemove', onDragMove);
         document.addEventListener('mouseup', onDragEnd);
