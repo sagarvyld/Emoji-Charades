@@ -45,14 +45,23 @@ const Dumbcharades = (props) => {
 
 
     function handleAskAI() {
-        let aiString = '';
-        const randomAiStringLen = Math.floor(Math.random() * 5) + 1;
-        for (let i = 0; i < randomAiStringLen; i++) {
-            const randomEmojiIndex = Math.floor(Math.random() * 32);
-            aiString += emojis[randomEmojiIndex];
+        props.setTextAreaValue('');
+        const contentEditableElement = contentEditableRef.current;
+        if (contentEditableElement) {
+            contentEditableElement.setAttribute('data-placeholder', 'Generating...');
+            let aiString = '';
+            const randomAiStringLen = Math.floor(Math.random() * 5) + 1;
+            for (let i = 0; i < randomAiStringLen; i++) {
+                const randomEmojiIndex = Math.floor(Math.random() * 32);
+                aiString += emojis[randomEmojiIndex];
+            }
+            setTimeout(() => {
+                contentEditableElement.setAttribute('data-placeholder', 'Enter emojis');
+                props.setTextAreaValue(aiString);  
+            }, 1000);
         }
-        props.setTextAreaValue(aiString);
     }
+    
 
 
     const handleEmojiClick = (emoji) => {
