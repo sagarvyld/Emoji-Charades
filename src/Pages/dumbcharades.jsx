@@ -66,7 +66,7 @@ const Dumbcharades = (props) => {
 
     const handleSelectTopic = (topic) => {
         props.setSelectedTopic(topic);
-        setIsSlidebarOpen(false);
+        // setIsSlidebarOpen(false);
     };
     const changeSelectTopicArea = () => {
         let newTopicArea;

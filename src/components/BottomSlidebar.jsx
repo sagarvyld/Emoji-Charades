@@ -12,7 +12,7 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selecte
             setTimeout(() => {
                 setClosing(false);
                 onClose();
-            }, 500); // Match the duration of the slide-out animation
+            }, 500);
         }
     }, [isOpen, onClose]);
 
@@ -23,12 +23,21 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selecte
     const filteredTopics = topics.filter(topic =>
         topic.toLowerCase().includes(searchTerm.toLowerCase())
     );
+    function onSelectNewTopic(topic) {
+        onSelectTopic(topic);
+        setClosing(true);
+        setTimeout(() => {
+            setClosing(false);
+            onClose();
+        }, 500);
+    }
 
     const handleDragStart = (event) => {
         const slidebar = document.querySelector('.bottomSlidebar');
         const startY = event.clientY || event.touches[0].clientY;
         const startHeight = slidebar.getBoundingClientRect().height;
         const upperLimit = window.innerHeight * 0.95;
+        const midLimit = window.innerHeight * 0.7;
         const lowerLimit = window.innerHeight * 0.5;
 
         const onDragMove = (moveEvent) => {
@@ -45,7 +54,23 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selecte
         const onDragEnd = (endEvent) => {
             const endY = endEvent.clientY || endEvent.changedTouches[0].clientY;
             const endHeight = startHeight - (endY - startY);
+            slidebar.style.transition = 'height 0.5s ease';
+        
+            if (endHeight <= midLimit) {
+                slidebar.style.height = `${lowerLimit}px`;
+                // slidebar.style.transition = 'height 0.5s ease'; remove this animation after done
+                setTimeout(() => {
+                    slidebar.style.transition = '';
+                }, 500);
+            } else {
+                slidebar.style.height = `${upperLimit}px`;
+                // slidebar.style.transition = 'height 0.5s ease'; remove this animation after done
+                setTimeout(() => {
+                    slidebar.style.transition = '';
+                }, 500);
+            }
 
+        
             if (endHeight <= lowerLimit) {
                 setClosing(true);
                 setTimeout(() => {
@@ -53,12 +78,13 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selecte
                     onClose();
                 }, 500);
             }
-
+        
             document.removeEventListener('mousemove', onDragMove);
             document.removeEventListener('mouseup', onDragEnd);
             document.removeEventListener('touchmove', onDragMove);
             document.removeEventListener('touchend', onDragEnd);
         };
+        
 
         document.addEventListener('mousemove', onDragMove);
         document.addEventListener('mouseup', onDragEnd);
@@ -89,7 +115,7 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selecte
                     <div
                         key={index}
                         className={`topicItem ${selectedTopic === topic ? 'selected' : ''}`}
-                        onClick={() => onSelectTopic(topic)}
+                        onClick={() => onSelectNewTopic(topic)}
                     >
                         <span className='topicItemtxt' style={{ color: selectedTopic === topic ? '#C6FF00' : '' }}
                         >{topic}</span>
