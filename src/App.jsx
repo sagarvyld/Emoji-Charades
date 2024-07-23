@@ -9,12 +9,12 @@ import prompt from "./assets/Data";
 function App() {
   const [gameIndex, setIndex] = useState(null);
   const [textAreaValue, setTextAreaValue] = useState('');
-  const [selectedTopic, setSelectedTopic] = useState('Harry Potter');
-  const [selectedTopicArea, setSelectedTopicArea] = useState('Movie');
   const [textareaValueMsg, setTextareaValueMsg] = useState('');
 
   var TopicAreas = ['Movie', 'Songs', 'TV Shows'];
+  const [selectedTopicArea, setSelectedTopicArea] = useState(TopicAreas[Math.floor(Math.random()*3)]);
   const prompts = prompt[selectedTopicArea] || [];
+  const [selectedTopic, setSelectedTopic] = useState(prompts[Math.floor(Math.random()*40)]);
 
 
   const changeSelectTopicArea = () => {
@@ -23,9 +23,10 @@ function App() {
       const randomIndex = Math.floor(Math.random() * TopicAreas.length);
       newTopicArea = TopicAreas[randomIndex];
     } while (newTopicArea === selectedTopicArea);
+    const randIdx = Math.floor(Math.random()*30);
     setSelectedTopicArea(newTopicArea);
     setTextAreaValue('');
-    setSelectedTopic(prompt[newTopicArea][2]);
+    setSelectedTopic(prompt[newTopicArea][randIdx]);
   };
 
   let content;
