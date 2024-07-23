@@ -20,36 +20,36 @@ function App() {
   const changeSelectTopicArea = () => {
     let newTopicArea;
     do {
-        const randomIndex = Math.floor(Math.random() * TopicAreas.length);
-        newTopicArea = TopicAreas[randomIndex];
+      const randomIndex = Math.floor(Math.random() * TopicAreas.length);
+      newTopicArea = TopicAreas[randomIndex];
     } while (newTopicArea === selectedTopicArea);
     setSelectedTopicArea(newTopicArea);
     setTextAreaValue('');
     setSelectedTopic(prompt[newTopicArea][2]);
-};
+  };
 
   let content;
   switch (gameIndex) {
     case 0:
-      content = <Dumbcharades 
-      onClose={() => { setIndex(null); }} 
-      onforw={() => { setIndex(1) }} 
-      textAreaValue={textAreaValue} 
-      setTextAreaValue={setTextAreaValue} 
-      selectedTopic={selectedTopic} 
-      setSelectedTopic={setSelectedTopic} 
-      selectedTopicArea={selectedTopicArea} 
-      setSelectedTopicArea={setSelectedTopicArea}
-      changeSelectTopicArea={changeSelectTopicArea}
-      TopicAreas={TopicAreas}
-      prompts={prompts} />;
+      content = <Dumbcharades
+        onClose={() => { setIndex(null); }}
+        onforw={() => { setIndex(1) }}
+        textAreaValue={textAreaValue}
+        setTextAreaValue={setTextAreaValue}
+        selectedTopic={selectedTopic}
+        setSelectedTopic={setSelectedTopic}
+        selectedTopicArea={selectedTopicArea}
+        setSelectedTopicArea={setSelectedTopicArea}
+        changeSelectTopicArea={changeSelectTopicArea}
+        TopicAreas={TopicAreas}
+        prompts={prompts} />;
       break;
     case 1:
-      content = <SendPage selectedTopicArea={selectedTopicArea}  
-                          textAreaValue={textAreaValue} 
-                          textareaValueMsg={textareaValueMsg}
-                          setTextareaValueMsg={setTextareaValueMsg}
-                          onBack={() => { setIndex(0); }} />;
+      content = <SendPage selectedTopicArea={selectedTopicArea}
+        textAreaValue={textAreaValue}
+        textareaValueMsg={textareaValueMsg}
+        setTextareaValueMsg={setTextareaValueMsg}
+        onBack={() => { setIndex(0); }} />;
       break;
     default:
       content = <Landing onNext={() => { setIndex(0); }} />;
