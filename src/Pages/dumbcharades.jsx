@@ -7,8 +7,15 @@ const Dumbcharades = (props) => {
     const [isSlidebarOpen, setIsSlidebarOpen] = useState(false);
     const [cursorPosition, setCursorPosition] = useState(null);
     const contentEditableRef = useRef(null);
+    const [emojis] = useState([
+        '😀', '😁', '😂', '🤣', '😄', '😅',
+        '😆', '😉', '😊', '😋', '😎', '😍',
+        '😘', '🙂', '🤗', '🤔', '😐', '😑',
+        '😶', '🙄', '😏', '😣', '😥', '😮',
+        '🤐', '😯', '😪', '😫', '😴', '😌', 
+        '😬', '😤',
+    ]);
 
-    const TopicAreas = props.TopicAreas;
 
     useEffect(() => {
         if (cursorPosition !== null && contentEditableRef.current) {
@@ -37,12 +44,15 @@ const Dumbcharades = (props) => {
     }, [props.textAreaValue, cursorPosition]);
 
 
-    // function handleEmojiTextChange(event) {
-    //     let value = event.target.value;
-    //     if (!(textAreaValue.length === 0 && value[0] === '  ')) {
-    //         props.setTextAreaValue(value);
-    //     }
-    // }
+    function handleAskAI() {
+        let aiString = '';
+        const randomAiStringLen = Math.floor(Math.random() * 5) + 1;
+        for (let i = 0; i < randomAiStringLen; i++) {
+            const randomEmojiIndex = Math.floor(Math.random() * 32);
+            aiString += emojis[randomEmojiIndex];
+        }
+        props.setTextAreaValue(aiString);
+    }
 
 
     const handleEmojiClick = (emoji) => {
@@ -132,7 +142,7 @@ const Dumbcharades = (props) => {
                     onInput={handleInput} onSelect={handleSelect} style={{ resize: "none", whiteSpace: 'pre-wrap', overflowY: 'auto' }}>
                     {props.textAreaValue}
                 </div>
-                <div className='emojiAi'>
+                <div className='emojiAi' onClick={handleAskAI}>
                     <svg className="emojiAiIcon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                         <path d="M11.375 4.37503L10.5059 5.2442L8.75586 3.4942L9.62503 2.62503C9.87003 2.38003 10.185 2.26337 10.5 2.26337C10.815 2.26337 11.13 2.38003 11.375 2.62503C11.8592 3.1092 11.8592 3.89087 11.375 4.37503Z" fill="#161716" />
                         <path d="M10.0974 5.65829L3.79159 11.9583C3.30743 12.4425 2.52576 12.4425 2.04159 11.9583C1.55743 11.4741 1.55743 10.6925 2.04159 10.2083L8.34743 3.90829L10.0974 5.65829Z" fill="#161716" />
@@ -143,7 +153,7 @@ const Dumbcharades = (props) => {
                     <span className='emojiAiText'>Ask AI</span>
                 </div>
             </div>
-            <EmojiKeyboard onEmojiClick={handleEmojiClick} removeLast={removeLast} />
+            <EmojiKeyboard onEmojiClick={handleEmojiClick} removeLast={removeLast} emojis={emojis.slice(0,30)} remEmoji={emojis.slice(30,32)} />
             <button
                 className='nextForEmoji'
                 style={{ cursor: props.textAreaValue ? '' : 'not-allowed' }}

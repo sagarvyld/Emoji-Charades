@@ -1,14 +1,7 @@
-import React, { useState } from 'react';
-import './EmojiKeyboard.css'; // We'll create this CSS file next
+import React from 'react';
+import './EmojiKeyboard.css';
 
-const EmojiKeyboard = ({ onEmojiClick , removeLast}) => {
-    const [emojis] = useState([
-        '😀', '😁', '😂', '🤣', '😄', '😅',
-        '😆', '😉', '😊', '😋', '😎', '😍',
-        '😘', '🙂', '🤗', '🤔', '😐', '😑',
-        '😶', '🙄', '😏', '😣', '😥', '😮',
-        '🤐', '😯', '😪', '😫', '😴', '😌',
-    ]);
+const EmojiKeyboard = ({ onEmojiClick , removeLast, emojis ,remEmoji}) => {
 
     return (
         <div className="emoji-keyboard">
@@ -29,14 +22,14 @@ const EmojiKeyboard = ({ onEmojiClick , removeLast}) => {
                     className="emoji-item"
                     onClick={() => onEmojiClick('😤')}
                 >
-                    😤
+                    {remEmoji[0]}
                 </div>
                 <div 
                     key={32} 
                     className="emoji-item"
                     onClick={() => onEmojiClick('😬')}
                 >
-                    😬
+                    {remEmoji[1]}
                 </div>
                 <button 
                     className="emoji-space"
