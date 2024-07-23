@@ -9,7 +9,7 @@ import prompt from "./assets/Data";
 function App() {
   const [gameIndex, setIndex] = useState(null);
   const [textAreaValue, setTextAreaValue] = useState('');
-  const [selectedTopic, setSelectedTopic] = useState('Reservoir Dogs');
+  const [selectedTopic, setSelectedTopic] = useState('Harry Potter');
   const [selectedTopicArea, setSelectedTopicArea] = useState('Movie');
   const [textareaValueMsg, setTextareaValueMsg] = useState('');
 
