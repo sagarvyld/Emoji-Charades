@@ -16,6 +16,18 @@ function App() {
   var TopicAreas = ['Movie', 'Songs', 'TV Shows'];
   const prompts = prompt[selectedTopicArea] || [];
 
+
+  const changeSelectTopicArea = () => {
+    let newTopicArea;
+    do {
+        const randomIndex = Math.floor(Math.random() * TopicAreas.length);
+        newTopicArea = TopicAreas[randomIndex];
+    } while (newTopicArea === selectedTopicArea);
+    setSelectedTopicArea(newTopicArea);
+    setTextAreaValue('');
+    setSelectedTopic(prompt[newTopicArea][2]);
+};
+
   let content;
   switch (gameIndex) {
     case 0:
@@ -28,6 +40,7 @@ function App() {
       setSelectedTopic={setSelectedTopic} 
       selectedTopicArea={selectedTopicArea} 
       setSelectedTopicArea={setSelectedTopicArea}
+      changeSelectTopicArea={changeSelectTopicArea}
       TopicAreas={TopicAreas}
       prompts={prompts} />;
       break;
