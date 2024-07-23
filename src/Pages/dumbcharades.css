@@ -95,7 +95,9 @@
   height: 16.6vh;
   flex-shrink: 0;
   box-sizing: border-box;
-  padding-top: 33px;
+  /* padding-top: 33px; */
+  padding-top: 24px;
+  padding-top: 2.5vh;
   padding-left: 16px;
   font-size: 2rem;
   font-weight: 600;
@@ -104,6 +106,9 @@
   background: var(--Dark-Dark--60, #526175);
   font-family: "Noto Color Emoji","Gilroy";
   font-style: normal;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
 }
 
 .emojiTextArea[data-placeholder]:empty::before {

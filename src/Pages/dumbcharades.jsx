@@ -35,7 +35,7 @@ const Dumbcharades = (props) => {
         const currentPosition = cursorPosition || 0;
         const newValue = [props.textAreaValue.slice(0, currentPosition), emoji, props.textAreaValue.slice(currentPosition)].join('');
         props.setTextAreaValue(prevValue => {
-            if (prevValue.length === 0 && emoji === '  ') {
+            if ((prevValue.length === 0 && emoji === '  ')||(prevValue.length===24)) {
                 return prevValue; // Don't add space if it's the first character
             }
             setCursorPosition(currentPosition + emoji.length);
