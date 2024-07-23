@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './bottomSlidebar.css';
 
-const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selectedTopicArea }) => {
-    const topics = ['I don’t want any prompt', 'Inception', 'Can we talk about', 'Rate my fit', 'Reservoir Dogs', 'The Dark Knight', 'A daily essential', 'Interstellar', 'Pulp Fiction', 'Cook with me'];
+const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selectedTopicArea , prompts}) => {
+    const topics = prompts;
     const [searchTerm, setSearchTerm] = useState('');
     const [closing, setClosing] = useState(false);
     const slidebarRef = useRef(null);

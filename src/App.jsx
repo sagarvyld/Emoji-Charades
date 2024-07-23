@@ -4,12 +4,17 @@ import "./App.css";
 import Landing from "./Pages/Landing";
 import Dumbcharades from "./Pages/dumbcharades";
 import SendPage from "./Pages/SendPage";
+import prompt from "./assets/Data";
+
 function App() {
   const [gameIndex, setIndex] = useState(null);
   const [textAreaValue, setTextAreaValue] = useState('');
   const [selectedTopic, setSelectedTopic] = useState('Reservoir Dogs');
   const [selectedTopicArea, setSelectedTopicArea] = useState('Movie');
   const [textareaValueMsg, setTextareaValueMsg] = useState('');
+
+  var TopicAreas = ['Movie', 'Songs', 'TV Shows'];
+  const prompts = prompt[selectedTopicArea] || [];
 
   let content;
   switch (gameIndex) {
@@ -22,7 +27,9 @@ function App() {
       selectedTopic={selectedTopic} 
       setSelectedTopic={setSelectedTopic} 
       selectedTopicArea={selectedTopicArea} 
-      setSelectedTopicArea={setSelectedTopicArea} />;
+      setSelectedTopicArea={setSelectedTopicArea}
+      TopicAreas={TopicAreas}
+      prompts={prompts} />;
       break;
     case 1:
       content = <SendPage selectedTopicArea={selectedTopicArea}  

@@ -8,7 +8,7 @@ const Dumbcharades = (props) => {
     const [cursorPosition, setCursorPosition] = useState(null);
     const contentEditableRef = useRef(null);
 
-    const TopicAreas = ['Movie', 'Music', 'Sports', 'Literature', 'Books', 'Drama', 'Story', 'Poetry']
+    const TopicAreas = props.TopicAreas;
 
     useEffect(() => {
         if (cursorPosition !== null && contentEditableRef.current) {
@@ -164,6 +164,7 @@ const Dumbcharades = (props) => {
                 onSelectTopic={handleSelectTopic}
                 selectedTopic={props.selectedTopic}
                 selectedTopicArea={props.selectedTopicArea}
+                prompts={props.prompts}
             />}
         </div>
     )
