@@ -89,6 +89,7 @@ const Dumbcharades = (props) => {
             newTopicArea = TopicAreas[randomIndex];
         } while (newTopicArea === props.selectedTopicArea);
         props.setSelectedTopicArea(newTopicArea);
+        props.setTextAreaValue('');
     };
 
     const handleInput = (event) => {
