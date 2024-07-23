@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './bottomSlidebar.css';
 
 const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selectedTopicArea }) => {
     const topics = ['I don’t want any prompt', 'Inception', 'Can we talk about', 'Rate my fit', 'Reservoir Dogs', 'The Dark Knight', 'A daily essential', 'Interstellar', 'Pulp Fiction', 'Cook with me'];
     const [searchTerm, setSearchTerm] = useState('');
     const [closing, setClosing] = useState(false);
+    const slidebarRef = useRef(null);
 
     useEffect(() => {
         if (!isOpen) {
@@ -15,6 +16,31 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selecte
             }, 500);
         }
     }, [isOpen, onClose]);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (slidebarRef.current && !slidebarRef.current.contains(event.target)) {
+                setClosing(true);
+                setTimeout(() => {
+                    setClosing(false);
+                    onClose();
+                }, 500);
+            }
+        };
+
+        if (isOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isOpen, onClose]);
+
+
+
 
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);
@@ -58,13 +84,13 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selecte
         
             if (endHeight <= midLimit) {
                 slidebar.style.height = `${lowerLimit}px`;
-                // slidebar.style.transition = 'height 0.5s ease'; remove this animation after done
+                
                 setTimeout(() => {
                     slidebar.style.transition = '';
                 }, 500);
             } else {
                 slidebar.style.height = `${upperLimit}px`;
-                // slidebar.style.transition = 'height 0.5s ease'; remove this animation after done
+                
                 setTimeout(() => {
                     slidebar.style.transition = '';
                 }, 500);
@@ -93,7 +119,7 @@ const BottomSlidebar = ({ isOpen, onClose, onSelectTopic, selectedTopic, selecte
     };
 
     return (
-        <div className={`bottomSlidebar ${isOpen && !closing ? 'open' : ''} ${closing ? 'close' : ''}`}>
+        <div ref={slidebarRef} className={`bottomSlidebar ${isOpen && !closing ? 'open' : ''} ${closing ? 'close' : ''}`}>
             <div className='slidebarHeader' onMouseDown={handleDragStart} onTouchStart={handleDragStart}>
                 <span className='slidebar_heading'>{selectedTopicArea}</span>
                 <div className='dragHandle'></div>
