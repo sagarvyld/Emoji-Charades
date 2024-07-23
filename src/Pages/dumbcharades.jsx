@@ -11,14 +11,28 @@ const Dumbcharades = (props) => {
     const TopicAreas = ['Movie', 'Music', 'Sports', 'Literature', 'Books', 'Drama', 'Story', 'Poetry']
 
     useEffect(() => {
-        if (cursorPosition !== null) {
+        if (cursorPosition !== null && contentEditableRef.current) {
             const range = document.createRange();
             const selection = window.getSelection();
-            range.setStart(contentEditableRef.current.childNodes[0] || contentEditableRef.current, cursorPosition);
-            range.collapse(true);
-            selection.removeAllRanges();
-            selection.addRange(range);
-            contentEditableRef.current.focus();
+            const content = contentEditableRef.current.textContent; // Use textContent for accurate length
+
+            // Validate cursorPosition
+            if (cursorPosition > content.length) {
+                setCursorPosition(content.length);
+            }
+
+            const childNodes = contentEditableRef.current.childNodes;
+            if (childNodes.length > 0) {
+                const node = childNodes[0];
+                range.setStart(node, cursorPosition);
+                range.collapse(true);
+                selection.removeAllRanges();
+                selection.addRange(range);
+                contentEditableRef.current.focus();
+            } else {
+                // Handle case where childNodes are not available
+                console.warn("No child nodes found in contentEditable element");
+            }
         }
     }, [props.textAreaValue, cursorPosition]);
 
@@ -35,7 +49,7 @@ const Dumbcharades = (props) => {
         const currentPosition = cursorPosition || 0;
         const newValue = [props.textAreaValue.slice(0, currentPosition), emoji, props.textAreaValue.slice(currentPosition)].join('');
         props.setTextAreaValue(prevValue => {
-            if ((prevValue.length === 0 && emoji === '  ')||(prevValue.length===24)) {
+            if ((prevValue.length === 0 && emoji === '  ') || (prevValue.length === 24)) {
                 return prevValue; // Don't add space if it's the first character
             }
             setCursorPosition(currentPosition + emoji.length);
@@ -66,7 +80,7 @@ const Dumbcharades = (props) => {
 
     const handleSelectTopic = (topic) => {
         props.setSelectedTopic(topic);
-        // setIsSlidebarOpen(false);
+        props.setTextAreaValue('');
     };
     const changeSelectTopicArea = () => {
         let newTopicArea;
