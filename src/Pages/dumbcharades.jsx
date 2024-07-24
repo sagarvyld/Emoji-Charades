@@ -9,12 +9,10 @@ const Dumbcharades = (props) => {
         textAreaValue,
         setTextAreaValue,
         selectedTopic,
-        setSelectedTopic,
+        handleSelectTopic,
         selectedTopicArea,
-        setSelectedTopicArea,
         changeSelectTopicArea,
         handleAskAI,
-        TopicAreas,
         prompts,
         contentEditableRef,
         emojis,
@@ -90,10 +88,6 @@ const Dumbcharades = (props) => {
         setIsSlidebarOpen(false);
     };
 
-    const handleSelectTopic = (topic) => {
-        setSelectedTopic(topic);
-        setTextAreaValue('');
-    };
 
     const handleInput = (event) => {
         event.preventDefault();
