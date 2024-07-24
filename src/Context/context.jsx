@@ -66,7 +66,7 @@ const ECProvider = ({ children }) => {
         [array[i], array[j]] = [array[j], array[i]];
       }
     };
-    // const uniqueReqEmojis = [...new Set(reqEmoji.match(/[\p{Emoji}]/gu))];
+
     const regex = emojiRegex();
     const emojiis = reqEmoji.match(regex);
 

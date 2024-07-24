@@ -47,7 +47,7 @@ const Dumbcharades = (props) => {
 
 
     const handleEmojiClick = (emoji) => {
-        const currentPosition = cursorPosition || 0;
+        const currentPosition = cursorPosition || textAreaValue.length;
         const newValue = [textAreaValue.slice(0, currentPosition), emoji, textAreaValue.slice(currentPosition)].join('');
         setTextAreaValue(prevValue => {
             if ((prevValue.length === 0 && emoji === '  ') || (prevValue.length === 24)) {
