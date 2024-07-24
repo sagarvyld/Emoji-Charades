@@ -11,6 +11,11 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select:none;
+  user-select: none;
+  -webkit-touch-callout:none;
 }
 body{
   background: var(--Dark-Dark--100, #0E1928);
