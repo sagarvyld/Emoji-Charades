@@ -15,14 +15,11 @@ const Dumbcharades = (props) => {
         '😬', '😤',
     ]);
 
-
     useEffect(() => {
         if (cursorPosition !== null && props.contentEditableRef.current) {
             const range = document.createRange();
             const selection = window.getSelection();
-            const content = props.contentEditableRef.current.textContent; // Use textContent for accurate length
-
-            // Validate cursorPosition
+            const content = props.contentEditableRef.current.textContent; 
             if (cursorPosition > content.length) {
                 setCursorPosition(content.length);
             }
@@ -36,15 +33,10 @@ const Dumbcharades = (props) => {
                 selection.addRange(range);
                 props.contentEditableRef.current.focus();
             } else {
-                // Handle case where childNodes are not available
                 console.warn("No child nodes found in contentEditable element");
             }
         }
     }, [props.textAreaValue, cursorPosition]);
-
-
-    
-    
 
 
     const handleEmojiClick = (emoji) => {
@@ -84,7 +76,6 @@ const Dumbcharades = (props) => {
         props.setSelectedTopic(topic);
         props.setTextAreaValue('');
     };
-    //hi
 
     const handleInput = (event) => {
         event.preventDefault();
