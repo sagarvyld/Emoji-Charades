@@ -6,7 +6,6 @@ import BottomSlidebar from '../components/BottomSlidebar';
 const Dumbcharades = (props) => {
     const [isSlidebarOpen, setIsSlidebarOpen] = useState(false);
     const [cursorPosition, setCursorPosition] = useState(null);
-    const contentEditableRef = useRef(null);
     const [emojis] = useState([
         '😀', '😁', '😂', '🤣', '😄', '😅',
         '😆', '😉', '😊', '😋', '😎', '😍',
@@ -18,24 +17,24 @@ const Dumbcharades = (props) => {
 
 
     useEffect(() => {
-        if (cursorPosition !== null && contentEditableRef.current) {
+        if (cursorPosition !== null && props.contentEditableRef.current) {
             const range = document.createRange();
             const selection = window.getSelection();
-            const content = contentEditableRef.current.textContent; // Use textContent for accurate length
+            const content = props.contentEditableRef.current.textContent; // Use textContent for accurate length
 
             // Validate cursorPosition
             if (cursorPosition > content.length) {
                 setCursorPosition(content.length);
             }
 
-            const childNodes = contentEditableRef.current.childNodes;
+            const childNodes = props.contentEditableRef.current.childNodes;
             if (childNodes.length > 0) {
                 const node = childNodes[0];
                 range.setStart(node, cursorPosition);
                 range.collapse(true);
                 selection.removeAllRanges();
                 selection.addRange(range);
-                contentEditableRef.current.focus();
+                props.contentEditableRef.current.focus();
             } else {
                 // Handle case where childNodes are not available
                 console.warn("No child nodes found in contentEditable element");
@@ -44,23 +43,7 @@ const Dumbcharades = (props) => {
     }, [props.textAreaValue, cursorPosition]);
 
 
-    function handleAskAI() {
-        props.setTextAreaValue('');
-        const contentEditableElement = contentEditableRef.current;
-        if (contentEditableElement) {
-            contentEditableElement.setAttribute('data-placeholder', 'Generating...');
-            let aiString = '';
-            const randomAiStringLen = Math.floor(Math.random() * 5) + 1;
-            for (let i = 0; i < randomAiStringLen; i++) {
-                const randomEmojiIndex = Math.floor(Math.random() * 32);
-                aiString += emojis[randomEmojiIndex];
-            }
-            setTimeout(() => {
-                contentEditableElement.setAttribute('data-placeholder', 'Enter emojis');
-                props.setTextAreaValue(aiString);  
-            }, 1000);
-        }
-    }
+    
     
 
 
@@ -69,7 +52,7 @@ const Dumbcharades = (props) => {
         const newValue = [props.textAreaValue.slice(0, currentPosition), emoji, props.textAreaValue.slice(currentPosition)].join('');
         props.setTextAreaValue(prevValue => {
             if ((prevValue.length === 0 && emoji === '  ') || (prevValue.length === 24)) {
-                return prevValue; // Don't add space if it's the first character
+                return prevValue; 
             }
             setCursorPosition(currentPosition + emoji.length);
             return newValue;
@@ -141,7 +124,7 @@ const Dumbcharades = (props) => {
                 </div>
             </div>
             <div className='emojiArea'>
-                <div className='emojiTextArea' ref={contentEditableRef} contentEditable
+                <div className='emojiTextArea' ref={props.contentEditableRef} contentEditable
                     onKeyDown={handleKeyDown}
                     readOnly={true}
                     data-placeholder="Enter emojis"
@@ -151,7 +134,7 @@ const Dumbcharades = (props) => {
                     onInput={handleInput} onSelect={handleSelect} style={{ resize: "none", whiteSpace: 'pre-wrap', overflowY: 'auto' }}>
                     {props.textAreaValue}
                 </div>
-                <div className='emojiAi' onClick={handleAskAI}>
+                <div className='emojiAi' onClick={props.handleAskAI}>
                     <svg className="emojiAiIcon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                         <path d="M11.375 4.37503L10.5059 5.2442L8.75586 3.4942L9.62503 2.62503C9.87003 2.38003 10.185 2.26337 10.5 2.26337C10.815 2.26337 11.13 2.38003 11.375 2.62503C11.8592 3.1092 11.8592 3.89087 11.375 4.37503Z" fill="#161716" />
                         <path d="M10.0974 5.65829L3.79159 11.9583C3.30743 12.4425 2.52576 12.4425 2.04159 11.9583C1.55743 11.4741 1.55743 10.6925 2.04159 10.2083L8.34743 3.90829L10.0974 5.65829Z" fill="#161716" />
