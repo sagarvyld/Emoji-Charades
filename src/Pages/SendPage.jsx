@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { ECContext } from '../Context/context';
 import './SendPage.css';
 import AddNote from '../components/AddNote';
 
 const SendPage = (props) => {
-
+    const {selectedTopicArea,
+    textAreaValue,
+    textareaValueMsg,
+    setTextareaValueMsg,} = useContext(ECContext);
     return (
         <div className='sendPage_EC'>
             <svg className='star1_EC' xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
@@ -26,8 +30,8 @@ const SendPage = (props) => {
             <div className='msgheading'><span>Add a special message</span></div>
             <div className='msgSubheading'><span>Add your personal touch to the activity
                 before you send..</span></div>
-            <div className="sendinfoDiv"><span>Guess the {props.selectedTopicArea}</span><span className='s2'>{props.textAreaValue}</span></div>
-            <AddNote textareaValue={props.textareaValueMsg} setTextareaValue={props.setTextareaValueMsg} />
+            <div className="sendinfoDiv"><span>Guess the {selectedTopicArea}</span><span className='s2'>{textAreaValue}</span></div>
+            <AddNote textareaValue={textareaValueMsg} setTextareaValue={setTextareaValueMsg} />
             <button className={`nxtbtntp`} ><span className={`nxtbtntp-txt`}>Send</span></button>
         </div>
     )
