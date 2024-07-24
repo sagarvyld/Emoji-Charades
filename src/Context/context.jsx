@@ -1,4 +1,4 @@
-import React, { createContext, useState, useRef } from "react";
+import React, { createContext, useState, useRef, useEffect } from "react";
 import prompt from "../assets/Data";
 import AiOptions from "../assets/AiOptions";
 import emojiRegex from 'emoji-regex';
@@ -94,7 +94,6 @@ const ECProvider = ({ children }) => {
   };
 
 
-
   const handleSelectTopic = (topic) => {
     setSelectedTopic(topic);
     handleChangeEmojie(selectedTopicArea, topic);
@@ -119,6 +118,10 @@ const ECProvider = ({ children }) => {
 
   }
 
+
+  useEffect(() => {
+    handleChangeEmojie(selectedTopicArea, selectedTopic);
+  }, []);
 
   return (
     <ECContext.Provider
