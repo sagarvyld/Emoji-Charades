@@ -17,10 +17,11 @@ const Dumbcharades = (props) => {
         prompts,
         contentEditableRef,
         emojis,
+        cursorPosition,
+        setCursorPosition,
     } = useContext(ECContext);
 
     const [isSlidebarOpen, setIsSlidebarOpen] = useState(false);
-    const [cursorPosition, setCursorPosition] = useState(null);
 
     useEffect(() => {
         if (cursorPosition !== null && contentEditableRef.current) {
@@ -59,7 +60,7 @@ const Dumbcharades = (props) => {
 
 
     const removeLast = () => {
-        const currentPosition = cursorPosition;
+        const currentPosition = cursorPosition === null ? textAreaValue.length : cursorPosition;
         if (currentPosition > 0) {
             const value = textAreaValue.slice(0, currentPosition);
             const regex = emojiRegex();

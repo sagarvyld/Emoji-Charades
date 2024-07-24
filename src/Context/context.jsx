@@ -10,6 +10,7 @@ const ECProvider = ({ children }) => {
   const [textAreaValue, setTextAreaValue] = useState('');
   const [textareaValueMsg, setTextareaValueMsg] = useState('');
   const contentEditableRef = useRef(null);
+  const [cursorPosition, setCursorPosition] = useState(null);
 
   var TopicAreas = Object.keys(prompt);
   const [randomAiString, setRandomString] = useState(0);
@@ -114,11 +115,10 @@ const ECProvider = ({ children }) => {
       setTimeout(() => {
         contentEditableElement.setAttribute('data-placeholder', 'Enter emojis');
         setTextAreaValue(aiString);
+        setCursorPosition(null);
       }, 1000);
     }
-
   }
-
 
   useEffect(() => {
     handleChangeEmojie(selectedTopicArea, selectedTopic);
@@ -142,6 +142,8 @@ const ECProvider = ({ children }) => {
         setTextareaValueMsg,
         handleSelectTopic,
         emojis,
+        cursorPosition,
+        setCursorPosition,
       }}
     >
       {children}
