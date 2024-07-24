@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import './dumbcharades.css';
 import EmojiKeyboard from '../components/EmojiKeyboard';
 import BottomSlidebar from '../components/BottomSlidebar';
+import emojiRegex from 'emoji-regex';
 import { ECContext } from '../Context/context';
 
 const Dumbcharades = (props) => {
@@ -61,7 +62,7 @@ const Dumbcharades = (props) => {
         const currentPosition = cursorPosition;
         if (currentPosition > 0) {
             const value = textAreaValue.slice(0, currentPosition);
-            const regex = /[\uD800-\uDBFF][\uDC00-\uDFFF]|\p{Emoji_Presentation}/gu;
+            const regex = emojiRegex();
     
             const matches = [...value.matchAll(regex)];
             if (matches.length > 0) {
