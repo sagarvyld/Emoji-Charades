@@ -17,18 +17,11 @@ const Dumbcharades = (props) => {
         TopicAreas,
         prompts,
         contentEditableRef,
+        emojis,
     } = useContext(ECContext);
 
     const [isSlidebarOpen, setIsSlidebarOpen] = useState(false);
     const [cursorPosition, setCursorPosition] = useState(null);
-    const [emojis] = useState([
-        '😀', '😁', '😂', '🤣', '😄', '😅',
-        '😆', '😉', '😊', '😋', '😎', '😍',
-        '😘', '🙂', '🤗', '🤔', '😐', '😑',
-        '😶', '🙄', '😏', '😣', '😥', '😮',
-        '🤐', '😯', '😪', '😫', '😴', '😌',
-        '😬', '😤',
-    ]);
 
     useEffect(() => {
         if (cursorPosition !== null && contentEditableRef.current) {
@@ -65,17 +58,40 @@ const Dumbcharades = (props) => {
         });
     };
 
+
     const removeLast = () => {
         const currentPosition = cursorPosition;
         if (currentPosition > 0) {
-            const newValue = textAreaValue.slice(0, currentPosition - 2) + textAreaValue.slice(currentPosition);
-            setTextAreaValue(prevValue => {
-                if (prevValue.length === 0) return '';
-                return newValue;
-            });
-            setCursorPosition(currentPosition - 2);
+            const value = textAreaValue.slice(0, currentPosition);
+            const regex = /[\uD800-\uDBFF][\uDC00-\uDFFF]|\p{Emoji_Presentation}/gu;
+    
+            const matches = [...value.matchAll(regex)];
+            if (matches.length > 0) {
+                const lastMatch = matches[matches.length - 1];
+                const newValue = textAreaValue.slice(0, lastMatch.index) + textAreaValue.slice(currentPosition);
+                setTextAreaValue(newValue);
+                setCursorPosition(lastMatch.index);
+            } else {
+                // Fallback for single characters
+                const newValue = textAreaValue.slice(0, currentPosition - 1) + textAreaValue.slice(currentPosition);
+                setTextAreaValue(newValue);
+                setCursorPosition(currentPosition - 1);
+            }
         }
     };
+
+    // const removeLast = () => {
+    //     const currentPosition = cursorPosition;
+    //     if (currentPosition > 0) {
+    //         console.log(textAreaValue.slice(0, currentPosition))
+    //         const newValue = textAreaValue.slice(0, currentPosition - 2) + textAreaValue.slice(currentPosition);
+    //         setTextAreaValue(prevValue => {
+    //             if (prevValue.length === 0) return '';
+    //             return newValue;
+    //         });
+    //         setCursorPosition(currentPosition - 2);
+    //     }
+    // };
 
 
     const handleNewSelectClick = () => {

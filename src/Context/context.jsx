@@ -15,6 +15,16 @@ const ECProvider = ({ children }) => {
     const [selectedTopicArea, setSelectedTopicArea] = useState(TopicAreas[Math.floor(Math.random() * 3)]);
     const prompts = prompt[selectedTopicArea] || [];
     const [selectedTopic, setSelectedTopic] = useState(prompts[Math.floor(Math.random() * 40)]);
+
+
+    const [emojis] = useState([
+      '😀', '😁', '😂', '🤣', '😄', '😅',
+      '😆', '😉', '😊', '😋', '😎', '😍',
+      '😘', '🙂', '🤗', '🤔', '😐', '😑',
+      '😶', '🙄', '😏', '😣', '😥', '😮',
+      '🤐', '😯', '😪', '😫', '😴', '😌',
+      '😬', '😤',
+  ]);
   
   
     const changeSelectTopicArea = () => {
@@ -64,6 +74,7 @@ const ECProvider = ({ children }) => {
         contentEditableRef,
         textareaValueMsg,
         setTextareaValueMsg,
+        emojis,
       }}
     >
       {children}
