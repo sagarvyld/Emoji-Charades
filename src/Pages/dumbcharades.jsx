@@ -80,18 +80,6 @@ const Dumbcharades = (props) => {
         }
     };
 
-    // const removeLast = () => {
-    //     const currentPosition = cursorPosition;
-    //     if (currentPosition > 0) {
-    //         console.log(textAreaValue.slice(0, currentPosition))
-    //         const newValue = textAreaValue.slice(0, currentPosition - 2) + textAreaValue.slice(currentPosition);
-    //         setTextAreaValue(prevValue => {
-    //             if (prevValue.length === 0) return '';
-    //             return newValue;
-    //         });
-    //         setCursorPosition(currentPosition - 2);
-    //     }
-    // };
 
 
     const handleNewSelectClick = () => {

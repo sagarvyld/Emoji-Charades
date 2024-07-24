@@ -10,7 +10,7 @@ const ECProvider = ({ children }) => {
     const [textareaValueMsg, setTextareaValueMsg] = useState('');
     const contentEditableRef = useRef(null);
   
-    var TopicAreas = ['Movie', 'Songs', 'TV Shows'];
+    var TopicAreas = Object.keys(prompt);
     const [randomAiString, setRandomString] = useState(0);
     const [selectedTopicArea, setSelectedTopicArea] = useState(TopicAreas[Math.floor(Math.random() * 3)]);
     const prompts = prompt[selectedTopicArea] || [];
