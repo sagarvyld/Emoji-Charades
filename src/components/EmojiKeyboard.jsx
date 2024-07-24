@@ -20,14 +20,14 @@ const EmojiKeyboard = ({ onEmojiClick , removeLast, emojis ,remEmoji}) => {
                 <div 
                     key={31} 
                     className="emoji-item"
-                    onClick={() => onEmojiClick('😤')}
+                    onClick={() => onEmojiClick(remEmoji[0])}
                 >
                     {remEmoji[0]}
                 </div>
                 <div 
                     key={32} 
                     className="emoji-item"
-                    onClick={() => onEmojiClick('😬')}
+                    onClick={() => onEmojiClick(remEmoji[1])}
                 >
                     {remEmoji[1]}
                 </div>

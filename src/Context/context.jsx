@@ -89,7 +89,7 @@ const ECProvider = ({ children }) => {
     setSelectedTopicArea(newTopicArea);
     setTextAreaValue('');
     setSelectedTopic(prompt[newTopicArea][randIdx]);
-
+    contentEditableRef.current.setAttribute('data-placeholder', 'Enter emojis');
     handleChangeEmojie(newTopicArea, prompt[newTopicArea][randIdx]);
   };
 
@@ -98,6 +98,7 @@ const ECProvider = ({ children }) => {
     setSelectedTopic(topic);
     handleChangeEmojie(selectedTopicArea, topic);
     setTextAreaValue('');
+    contentEditableRef.current.setAttribute('data-placeholder', 'Enter emojis');
   };
 
 
