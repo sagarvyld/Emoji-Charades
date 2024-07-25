@@ -19,14 +19,10 @@ const Dumbcharades = (props) => {
         emojis,
         cursorPosition,
         setCursorPosition,
-        handleChangeEmojie,
     } = useContext(ECContext);
 
     const [isSlidebarOpen, setIsSlidebarOpen] = useState(false);
 
-    useEffect(()=>{
-        handleChangeEmojie(selectedTopicArea, selectedTopic);
-    },[])
 
     useEffect(() => {
         if (cursorPosition !== null && contentEditableRef.current) {

@@ -44,14 +44,7 @@ const ECProvider = ({ children }) => {
     ]
   };
 
-  const [emojis, setEmojis] = useState([
-    '😀', '😁', '🎹', '🎲', '😄', '😅',
-    '😆', '😉', '😊', '😋', '😎', '😍',
-    '🌠', '🌌', '⭐', '🌈', '🌧️', '⛅',
-    '😔', '😓', '😩', '😡', '😠', '😤',
-    '😈', '👿', '💀', '☠️', '👻', '💩',
-    '😬', '😤',
-  ]);
+  const [emojis, setEmojis] = useState([]);
 
   useEffect(() => {
     const fetchGridLetters = async () => {
@@ -77,11 +70,11 @@ const ECProvider = ({ children }) => {
     fetchGridLetters();
   }, []);
 
-  // useEffect(() => {
-  //   if (selectedTopicArea && selectedTopic) {
-  //     handleChangeEmojie(selectedTopicArea, selectedTopic);
-  //   }
-  // }, [selectedTopicArea, selectedTopic]);
+  useEffect(() => {
+    if (selectedTopicArea && selectedTopic) {
+      handleChangeEmojie(selectedTopicArea, selectedTopic);
+    }
+  }, [selectedTopicArea, selectedTopic]);
 
 function handleChangeEmojie(newTopicArea, seltp) {
   const TempEmoji = sampleEmojie[newTopicArea];
@@ -136,12 +129,12 @@ function handleChangeEmojie(newTopicArea, seltp) {
     setSelectedTopic(newTopic);
     setPrompts(AiOptions[newTopicArea].map((val) => val.text));
     contentEditableRef.current.setAttribute('data-placeholder', 'Enter emojis');
-    handleChangeEmojie(newTopicArea, newTopic);
+    // handleChangeEmojie(newTopicArea, newTopic);
   };
 
   const handleSelectTopic = (topic) => {
     setSelectedTopic(topic);
-    handleChangeEmojie(selectedTopicArea, topic);
+    // handleChangeEmojie(selectedTopicArea, topic);
     setTextAreaValue('');
     contentEditableRef.current.setAttribute('data-placeholder', 'Enter emojis');
   };
