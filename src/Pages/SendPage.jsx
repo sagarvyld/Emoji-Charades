@@ -1,13 +1,63 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ECContext } from '../Context/context';
 import './SendPage.css';
 import AddNote from '../components/AddNote';
 
 const SendPage = (props) => {
     const {selectedTopicArea,
+        selectedTopic,
     textAreaValue,
     textareaValueMsg,
     setTextareaValueMsg,} = useContext(ECContext);
+
+
+
+
+    async function handleForwarsActivity() {
+        const data = {
+          reqD: [
+            { topicArea: selectedTopicArea },
+            { topic:selectedTopic },
+            { Emoji: textAreaValue },
+          ],
+          message: textareaValueMsg
+        };
+        console.log("Sending Data",JSON.stringify(data));
+        try {
+          const response = await fetch('https://vyld-cb-dev-api.vyld.io/api/v1/activity-games/game', {
+            // mode: 'no-cors',
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(data),
+          });
+          //  console.log("response", response);
+          if (response.ok) {
+            const responseData = await response.json();
+            console.log("data",responseData );
+            const activityId = responseData.data.activityId; 
+            console.log('Activity ID:', activityId);
+            props.setActivityId(activityId);
+          } else {
+            console.error('Failed to send data', response.statusText);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+        props.onforw();
+      }
+
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            document.querySelector('.sendPage_EC').classList.add('show-elements');
+        }, 100); // Small delay to ensure elements are initially hidden
+
+        return () => clearTimeout(timeout);
+    }, []);
+
+
     return (
         <div className='sendPage_EC'>
             <svg className='star1_EC' xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
@@ -32,7 +82,7 @@ const SendPage = (props) => {
                 before you send..</span></div>
             <div className="sendinfoDiv"><span>Guess the {selectedTopicArea}</span><span className='s2'>{textAreaValue}</span></div>
             <AddNote textareaValue={textareaValueMsg} setTextareaValue={setTextareaValueMsg} />
-            <button className={`nxtbtntp`} ><span className={`nxtbtntp-txt`}>Send</span></button>
+            <button className={`nxtbtntp`} onClick={handleForwarsActivity}><span className={`nxtbtntp-txt`}>Send</span></button>
         </div>
     )
 }

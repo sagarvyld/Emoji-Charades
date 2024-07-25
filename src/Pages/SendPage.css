@@ -176,3 +176,35 @@
   stroke-width: 2px;
   stroke: var(--Neutral-Light, #fff);
 }
+
+.sendPage_EC > * {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.sendPage_EC.show-elements > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sendPage_EC.show-elements > :nth-child(1) {
+  transition-delay: 0.2s;
+}
+
+.sendPage_EC.show-elements > :nth-child(2) {
+  transition-delay: 0.4s;
+}
+
+.sendPage_EC.show-elements > :nth-child(3) {
+  transition-delay: 0.6s;
+}
+
+.sendPage_EC.show-elements > :nth-child(4) {
+  transition-delay: 0.8s;
+}
+
+.sendPage_EC.show-elements > :nth-child(5) {
+  transition-delay: 1s;
+}
+
