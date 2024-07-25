@@ -15,7 +15,7 @@ const Disclosure = (props) => {
   }, []);
 
   const handleCopy = () => {
-    const url = `https://2t1lactivitywybtestingrec.netlify.app?activityId=${props.activityId}`;
+    const url = `https://emojichactivitywybtestingv2rec.netlify.app?activityId=${props.activityId}`;
     navigator.clipboard.writeText(url)
       .then(() => setCopyFeedback('Copied!'))
       .catch(() => setCopyFeedback('Copy failed. Please try again.'));
