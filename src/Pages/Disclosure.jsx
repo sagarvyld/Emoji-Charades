@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Disclosure.css'; // Importing the CSS for styling
+import './Disclosure.css'; 
 import imag from '../assets/img/Boxes-3.png';
 
 const Disclosure = (props) => {

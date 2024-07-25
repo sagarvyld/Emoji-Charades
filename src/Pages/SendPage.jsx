@@ -11,8 +11,6 @@ const SendPage = (props) => {
     setTextareaValueMsg,} = useContext(ECContext);
 
 
-
-
     async function handleForwarsActivity() {
         const data = {
           reqD: [
@@ -52,7 +50,7 @@ const SendPage = (props) => {
     useEffect(() => {
         const timeout = setTimeout(() => {
             document.querySelector('.sendPage_EC').classList.add('show-elements');
-        }, 100); // Small delay to ensure elements are initially hidden
+        }, 100); 
 
         return () => clearTimeout(timeout);
     }, []);
