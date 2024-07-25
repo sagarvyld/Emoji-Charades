@@ -185,6 +185,7 @@ function handleChangeEmojie(newTopicArea, seltp) {
         emojis,
         cursorPosition,
         setCursorPosition,
+        handleChangeEmojie,
       }}
     >
       {children}

@@ -19,9 +19,14 @@ const Dumbcharades = (props) => {
         emojis,
         cursorPosition,
         setCursorPosition,
+        handleChangeEmojie,
     } = useContext(ECContext);
 
     const [isSlidebarOpen, setIsSlidebarOpen] = useState(false);
+
+    useEffect(()=>{
+        handleChangeEmojie(selectedTopicArea, selectedTopic);
+    },[])
 
     useEffect(() => {
         if (cursorPosition !== null && contentEditableRef.current) {
@@ -72,7 +77,6 @@ const Dumbcharades = (props) => {
                 setTextAreaValue(newValue);
                 setCursorPosition(lastMatch.index);
             } else {
-                // Fallback for single characters
                 const newValue = textAreaValue.slice(0, currentPosition - 1) + textAreaValue.slice(currentPosition);
                 setTextAreaValue(newValue);
                 setCursorPosition(currentPosition - 1);
