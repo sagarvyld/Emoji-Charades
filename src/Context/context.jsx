@@ -58,7 +58,6 @@ const ECProvider = ({ children }) => {
       try {
         const response = await fetch("https://vyld-cb-staging-api.vyld.io/api/v1/activity-games?name=emoji_charades");
         const res = await response.json();
-        console.log(res);
         const fetchedTopicAreas = Object.keys(res.data.result);
         const fetchedAiOptions = res.data.result;
         const initialTopicArea = fetchedTopicAreas[Math.floor(Math.random() * fetchedTopicAreas.length)];
@@ -86,7 +85,6 @@ const ECProvider = ({ children }) => {
 
 function handleChangeEmojie(newTopicArea, seltp) {
   const TempEmoji = sampleEmojie[newTopicArea];
-  console.log("temp",TempEmoji)
   const opt = AiOptions[newTopicArea].find(obj => obj.text === seltp).options;
   const reqEmoji = opt.map((ok, index) => {
     return ok.data;
@@ -112,8 +110,6 @@ function handleChangeEmojie(newTopicArea, seltp) {
 
   const uniqueReqEmojis = [...new Set(emojiis)];
   const filteredTempEmojis = TempEmoji.filter(emoji => !uniqueReqEmojis.includes(emoji));
-
-  console.log("req", uniqueReqEmojis);
 
   shuffleArray(filteredTempEmojis);
 
