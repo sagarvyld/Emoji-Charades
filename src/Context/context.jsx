@@ -49,7 +49,7 @@ const ECProvider = ({ children }) => {
   useEffect(() => {
     const fetchGridLetters = async () => {
       try {
-        const response = await fetch("https://vyld-cb-staging-api.vyld.io/api/v1/activity-games?name=emoji_charades");
+        const response = await fetch("https://vyld-cb-dev-api.vyld.io/api/v1/activity-games?name=emoji_charades");
         const res = await response.json();
         const fetchedTopicAreas = Object.keys(res.data.result);
         const fetchedAiOptions = res.data.result;
